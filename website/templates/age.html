@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+  <head>
+   <link rel="stylesheet" href='/static/mainstyle.css' />
+  </head>
+
+  <body onload="loadDoc(),test()">
+<p> DraftBeer Interface</p>
+<table>
+<thead>
+  <tr>
+    <th></th>
+
+    <th>Current Temp</th>
+
+    <th>Goal Temp</th>
+  </tr>
+</thead>
+<tbody>
+  <tr>
+    <td class="table-unit">Beer tank</td>
+
+    <td>
+<p id="demo">The XMLHttpRequest Object</p>
+</td>
+
+    <td><input type="number" name="someid" /></td>
+  </tr>
+  <tr>
+    <td class="table-unit"><p> Water&nbspcooler </p></td>
+   
+    <td><p id="water">34</p></td>
+    <td>Na</td>
+  </tr>
+  <tr>
+    <td class="table-unit"><p>Air</p></td>
+
+    <td><p id="air">25</p></td>
+    <td>Na</td>
+  </tr>
+</tbody>
+</table>
+
+<div class="peltier-wrapper">
+<button type="button" class="peltier-controller peltier-on" onclick="turnOnLed()">Turn on all</button>
+<button type="button" class="peltier-controller peltier-off"  onclick="turnOnLed()">Turn off all</button>
+
+
+<button type="button" class="peltier peltier-on" onclick="turnOnLed()">Cooler 1</button>
+<button type="button" class="peltier peltier-off" onclick="turnOffLed()">Cooler 2</button>
+<button type="button" class="peltier peltier peltier-on" onclick="turnOnLed()">Cooler 3</button>
+<button type="button" class="peltier peltier peltier-on" onclick="turnOnLed()">Cooler 4</button>
+<button type="button" class="peltier peltier peltier-on" onclick="turnOnLed()">Cooler 5</button>
+<button type="button" class="peltier peltier peltier-on" onclick="turnOnLed()">Cooler 6</button>
+<button type="button" class="peltier peltier peltier-on" onclick="turnOnLed()">Cooler 7</button>
+<button type="button" class="peltier peltier peltier-on" onclick="turnOnLed()">Cooler 8</button>
+</div>
+<script>
+function test() {
+var timer = setInterval( loadDoc, 100);
+}
+</script>
+
+
+<script>
+function loadDoc() {
+  var xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200 ) {
+      document.getElementById("demo").innerHTML =
+      this.responseText;
+	  console.log(this.responseText);
+    }
+  };
+  xhttp.open("GET", "http://{{ip}}:80/cakes", true);
+  xhttp.send();
+}
+function turnOnLed() {
+  var xhttp = new XMLHttpRequest();
+  xhttp.open("GET", "http://{{ip}}:80/ledOn", true);
+  xhttp.send();
+}
+
+function turnOffLed() {
+  var xhttp = new XMLHttpRequest();
+  xhttp.open("GET", "http://{{ip}}:80/ledOff", true);
+  xhttp.send();
+}
+</script>
+  </body>
