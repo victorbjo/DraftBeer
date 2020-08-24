@@ -1,0 +1,56 @@
+body{
+background-color:#f0f4f5;
+font-size:50pt;
+}
+.peltier{
+background-color:#2fe763;
+border:0px;
+height:55vw;
+width:45vw;
+max-width:60vh;
+max-height:60vh;
+font-size: 50px;
+margin-bottom:2vw;
+margin-right:2vw;
+box-shadow: 1vw 1vw 1vw grey;
+border-radius:3px;
+}
+.peltier-controller{
+border:0px;
+height:10vw;
+width:45vw;
+max-width:60vh;
+max-height:60vh;
+font-size: 50px;
+margin-bottom:2vw;
+margin-right:2vw;
+box-shadow: 1vw 1vw 1vw grey;
+border-radius:3px;
+}
+.peltier-on{
+background-color:#2fe763;
+}
+.peltier-off{
+background-color:#f3484f
+}
+.peltier-wrapper{
+  display: flex; 
+   flex-wrap: wrap;
+	justify-content:center;
+}
+table{
+text-align:center;
+}
+.table-unit{
+	text-align:left;
+}
+p{
+margin-bottom:20px;
+margin-top:20px;
+}
+input{
+	border:10px;
+	font-size:50px;
+	width:120px;
+	height:70px;
+}
