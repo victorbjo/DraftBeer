@@ -2,59 +2,114 @@
 <html>
   <head>
    <link rel="stylesheet" href='/static/mainstyle.css' />
+   <link rel="stylesheet" href='/static/slider.css' />
   </head>
 
   <body onload="loadDoc(),test()">
+  <div class="div-main">
 <p> DraftBeer Interface</p>
+<div class="info-wrapper">
+<div class="info">
+<h3>Beer temperature</h3>
 <table>
 <thead>
   <tr>
+    <th><p>Current temp:</p><p id="demo">The XMLHttpRequest Object</p></th>
     <th></th>
-
-    <th>Current Temp</th>
-
-    <th>Goal Temp</th>
+    <th></th>
+  </tr>
+<tr>
+    <th><p>Target temp:</p><input type="number" name="someid" /></th>
+    <th></th>
+    <th></th>
   </tr>
 </thead>
-<tbody>
+</table>
+<table>
+<thead>
   <tr>
-    <td class="table-unit">Beer tank</td>
+	<th>Manual control:</th>
+    <th>&nbsp;&nbsp; </th>
+    <th><label class="switch">
 
-    <td>
-<p id="demo">The XMLHttpRequest Object</p>
-</td>
-
-    <td><input type="number" name="someid" /></td>
+  <input type="checkbox">
+  <span class="slider round"></span>
+</label></th>
   </tr>
-  <tr>
-    <td class="table-unit"><p> Water&nbspcooler </p></td>
-   
-    <td><p id="water">34</p></td>
-    <td>Na</td>
-  </tr>
-  <tr>
-    <td class="table-unit"><p>Air</p></td>
-
-    <td><p id="air">25</p></td>
-    <td>Na</td>
-  </tr>
-</tbody>
+</thead>
 </table>
 
-<div class="peltier-wrapper">
-<button type="button" class="peltier-controller peltier-on" onclick="turnOnLed()">Turn on all</button>
-<button type="button" class="peltier-controller peltier-off"  onclick="turnOnLed()">Turn off all</button>
-
-
-<button type="button" class="peltier peltier-on" onclick="turnOnLed()">Cooler 1</button>
-<button type="button" class="peltier peltier-off" onclick="turnOffLed()">Cooler 2</button>
-<button type="button" class="peltier peltier peltier-on" onclick="turnOnLed()">Cooler 3</button>
-<button type="button" class="peltier peltier peltier-on" onclick="turnOnLed()">Cooler 4</button>
-<button type="button" class="peltier peltier peltier-on" onclick="turnOnLed()">Cooler 5</button>
-<button type="button" class="peltier peltier peltier-on" onclick="turnOnLed()">Cooler 6</button>
-<button type="button" class="peltier peltier peltier-on" onclick="turnOnLed()">Cooler 7</button>
-<button type="button" class="peltier peltier peltier-on" onclick="turnOnLed()">Cooler 8</button>
 </div>
+<div class="info"><div>
+<h3>Water temperature</h3></div>
+<p id="demo">The XMLHttpRequest Object</p>
+</div>
+<div class="info">
+<h3>Air temperature</h3>
+<p id="demo">The XMLHttpRequest Object</p>
+</div>
+</div>
+
+<div class="peltier-wrapper">
+
+
+<div  class="peltier " onclick="turnOnLed()"><p>Cooler 1&nbsp;
+<label class="switch">
+  <input type="checkbox">
+  <span class="slider round"></span>
+</label>
+</p>
+</div>
+<div class="peltier" onclick="turnOffLed()"><p>Cooler 2&nbsp;
+<label class="switch">
+  <input type="checkbox">
+  <span class="slider round"></span>
+</label>
+</p>
+</div>
+<div class="peltier" onclick="turnOnLed()"><p>Cooler 3&nbsp;
+<label class="switch">
+  <input type="checkbox">
+  <span class="slider round"></span>
+</label>
+</p>
+</div>
+<div class="peltier" onclick="turnOnLed()"><p>Cooler 4&nbsp;
+<label class="switch">
+  <input type="checkbox">
+  <span class="slider round"></span>
+</label>
+</p>
+</div>
+<div class="peltier" onclick="turnOnLed()"><p>Cooler 5&nbsp;
+<label class="switch">
+  <input type="checkbox">
+  <span class="slider round"></span>
+</label>
+</p>
+</div>
+<div class="peltier" onclick="turnOnLed()"><p>Cooler 6&nbsp;
+<label class="switch">
+  <input type="checkbox">
+  <span class="slider round"></span>
+</label>
+</p>
+</div>
+<div class="peltier" onclick="turnOnLed()"><p>Cooler 7&nbsp;
+<label class="switch">
+  <input type="checkbox">
+  <span class="slider round"></span>
+</label>
+</p>
+</div>
+<div class="peltier" onclick="turnOnLed()"><p>Cooler 8&nbsp;
+<label class="switch">
+  <input type="checkbox">
+  <span class="slider round"></span>
+</label>
+</p>
+</div>
+</div></div>
 <script>
 function test() {
 var timer = setInterval( loadDoc, 100);
