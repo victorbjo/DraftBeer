@@ -1,0 +1,41 @@
+<div class="info-wrapper">
+<div class="info">
+<h3>Beer temperature</h3>
+<table>
+<thead>
+  <tr>
+    <th><p>Current temp:</p><br/><p id="beerTemp">The XMLHttpRequest Object</p></th>
+    <th></th>
+    <th></th>
+  </tr>
+<tr>
+    <th><p>Target temp:</p><input type="number" id="targetTemp" /></th>
+    <th></th>
+    <th></th>
+  </tr>
+</thead>
+</table>
+<table>
+<thead>
+  <tr>
+	<th>Manual control: </th>
+    <th>&nbsp;&nbsp; </th>
+    <th><label class="switch">
+
+  <input type="checkbox" id="ManualControl" onclick="changeMode()">
+  <span class="slider round"></span>
+</label></th>
+  </tr>
+</thead>
+</table>
+
+</div>
+<div class="info"><div>
+<h3 class="info-h3">Water temperatures<br/></h3></div>
+<p id="demo">The XMLHttpRequest Object</p>
+</div>
+<div class="info">
+<h3 class="info-h3">Air temperature<br/></h3>
+<p id="test">The XMLHttpRequest Object</p>
+</div>
+</div>

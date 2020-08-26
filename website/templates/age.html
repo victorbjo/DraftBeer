@@ -6,16 +6,16 @@
    
   </head>
 
-  <body onload="loadDoc(),test()">
+  <body onload="loadDoc(),test(),loadDocs()">
   <div class="div-main">
 <p> DraftBeer Interface</p>
-<div class="info-wrapper">
+<div id="infoDiv" class="info-wrapper">
 <div class="info">
 <h3>Beer temperature</h3>
 <table>
 <thead>
   <tr>
-    <th><p>Current temp:</p><br/><p id="demo">The XMLHttpRequest Object</p></th>
+    <th><p>Current temp:</p><br/><p id="beerTemp">The XMLHttpRequest Object</p></th>
     <th></th>
     <th></th>
   </tr>
@@ -43,11 +43,11 @@
 </div>
 <div class="info"><div>
 <h3 class="info-h3">Water temperatures<br/></h3></div>
-<p id="demo">The XMLHttpRequest Object</p>
+<p id="waterTemp">The XMLHttpRequest Object</p>
 </div>
 <div class="info">
 <h3 class="info-h3">Air temperature<br/></h3>
-<p id="test">The XMLHttpRequest Object</p>
+<p id="airTemp">The XMLHttpRequest Object</p>
 </div>
 </div>
 
@@ -135,13 +135,43 @@
 </div></div>
 <script>
 function test() {
-var timer = setInterval( loadDoc, 100);
+var timer = setInterval( loadDoc, 300);
+var timer1 = setInterval( loadDocs, 300);
 }
 </script>
 
 <script src='/static/toogle.js'></script>
 <script>
+function loadDocs() {
 
+  var xhttp = new XMLHttpRequest();
+  var tempArray =["","",""];
+	var idArray = ["beerTemp","waterTemp","airTemp"];
+	var tempArrayCount = 0;
+  xhttp.onreadystatechange = function() {
+
+    if (this.readyState == 4 && this.status == 200 ) {
+	for (var i = 0; i < this.responseText.length; i++)
+	{
+		if (this.responseText[i] != ";")
+		{
+			tempArray[tempArrayCount] = tempArray[tempArrayCount]+this.responseText[i];
+		}
+		else
+		{
+			tempArrayCount ++;
+		}
+	}
+	for (var i = 0; i < idArray.length; i++){
+
+	document.getElementById(idArray[i]).innerHTML = tempArray[i];
+
+}
+    }
+  };
+  xhttp.open("GET", "http://{{ip}}:80/test", true);
+  xhttp.send();
+}
 function loadDoc() {
   var xhttp = new XMLHttpRequest();
   xhttp.onreadystatechange = function() {

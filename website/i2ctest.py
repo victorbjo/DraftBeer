@@ -6,7 +6,9 @@ addr = 0x8 # bus address
 bus = SMBus(1) # indicates /dev/ic2-1
 
 def sendToArd(coolers, temp):
-        if abs(int(temp)) < 10:
+        if int(temp)==0:
+                temp = "00"
+        elif abs(int(temp)) < 10:
                 temp = "0"+str(abs(int(temp)))
         now = datetime.now()
         current_time = now.strftime("%H:%M:%S")

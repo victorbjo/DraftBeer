@@ -21,6 +21,7 @@ function changeMode() {
 	sendToArd();
 }
 function sendToArd() {
+alert("ok");
 var coolerCheck =["cooler1Check","cooler2Check","cooler3Check","cooler4Check","cooler5Check","cooler6Check","cooler7Check","cooler8Check"];
 var reader ="";
 if(document.getElementById("ManualControl").checked){
@@ -38,7 +39,7 @@ for (var i = 0; i < 8; i++){
 }
 }
 
-
+alert("ok1");
 var temp =  document.getElementById("targetTemp").value;
   var xhttp = new XMLHttpRequest();
   xhttp.onreadystatechange = function() {
@@ -48,7 +49,7 @@ var temp =  document.getElementById("targetTemp").value;
 	  console.log(this.responseText);
     }
   };
-
+alert(reader + temp);
   xhttp.open("GET", "http://192.168.0.247:80/demo?coolerStates="+reader+"&temp="+temp , true);
   xhttp.send();
 }

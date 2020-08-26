@@ -3,7 +3,7 @@ app = Flask(__name__)
 import random
 import socket
 import i2ctest as ic
-
+import fileParser as file
 s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 s.connect(("8.8.8.8", 80))
 print(s.getsockname()[0])
@@ -40,8 +40,14 @@ def cakes():
             tempsCount =+ 1
     y = temps[0]
     return render_template('cakes.html', cake = y)
+@app.route('/test',methods = ['GET'])
+def test():
+    temps = file.readFile("tempInfo.txt")
+    return render_template('info.html', beerTemp = temps[0], waterTemp = temps[1], airTemp = temps[2])
 @app.route('/demo',methods = ['GET'])
 def demo():
+    f = open("test.txt", "a")
+    f.write("Opened\n")
     coolerGet = str(request.args.get("coolerStates"))
     tempGet = str(request.args.get("temp"))
     ic.sendToArd(coolerGet,tempGet)
