@@ -3,9 +3,7 @@ app = Flask(__name__)
 import random
 import socket
 from smbus import SMBus
-import serial
-ser = serial.Serial('/dev/ttyUSB0', 115200, timeout=1)
-ser.flush()
+import i2ctest as ic
 addr = 0x8 # bus address
 bus = SMBus(1) # indicates /dev/ic2-1
 s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
@@ -46,12 +44,21 @@ def cakes():
     return render_template('cakes.html', cake = y)
 @app.route('/ledOn',methods = ['GET'])
 def ledOn():
-    bus.write_byte(addr, 0x1)
+
     return render_template('index.html')
 @app.route('/ledOff',methods = ['GET'])
 def ledOff():
-    bus.write_byte(addr, 0x0)
+   
     return render_template('index.html')
+
+@app.route('/demo',methods = ['GET'])
+def demo():
+    coolerGet = str(request.args.get("coolerStates"))
+    tempGet = str(request.args.get("temp"))
+    coolers  = "00111010"
+    temp = "32"
+    ic.sendToArd(coolers,temp)
+
+    return render_template('cakes.html', cake = coolerGet)
 if __name__ == '__main__':
-    app.run(debug=False,port=80,host='0.0.0.0')
-    
+    app.run(debug=False,port=80,host='0.0.0.0')    

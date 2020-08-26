@@ -3,6 +3,7 @@
   <head>
    <link rel="stylesheet" href='/static/mainstyle.css' />
    <link rel="stylesheet" href='/static/slider.css' />
+   
   </head>
 
   <body onload="loadDoc(),test()">
@@ -14,7 +15,7 @@
 <table>
 <thead>
   <tr>
-    <th><p>Current temp:</p><p id="demo">The XMLHttpRequest Object</p></th>
+    <th><p>Current temp:</p><br/><p id="demo">The XMLHttpRequest Object</p></th>
     <th></th>
     <th></th>
   </tr>
@@ -28,11 +29,11 @@
 <table>
 <thead>
   <tr>
-	<th>Manual control:</th>
+	<th>Manual control: <p id="demo1"> here</p></th>
     <th>&nbsp;&nbsp; </th>
     <th><label class="switch">
 
-  <input type="checkbox">
+  <input type="checkbox" onclick="changeDemo();">
   <span class="slider round"></span>
 </label></th>
   </tr>
@@ -41,12 +42,12 @@
 
 </div>
 <div class="info"><div>
-<h3>Water temperature</h3></div>
+<h3 class="info-h3">Water temperatures<br/></h3></div>
 <p id="demo">The XMLHttpRequest Object</p>
 </div>
 <div class="info">
-<h3>Air temperature</h3>
-<p id="demo">The XMLHttpRequest Object</p>
+<h3 class="info-h3">Air temperature<br/></h3>
+<p id="test">The XMLHttpRequest Object</p>
 </div>
 </div>
 
@@ -55,57 +56,57 @@
 
 <div  class="peltier " onclick="turnOnLed()"><p>Cooler 1&nbsp;
 <label class="switch">
-  <input type="checkbox">
-  <span class="slider round"></span>
+  <input id="cooler1Check"type="checkbox" onclick="">
+  <span id="cooler1Span" class="slider round"></span>
 </label>
 </p>
 </div>
 <div class="peltier" onclick="turnOffLed()"><p>Cooler 2&nbsp;
-<label class="switch">
-  <input type="checkbox">
-  <span class="slider round"></span>
+<label id="tjek" class="switch">
+  <input id="cooler2Check" type="checkbox";>
+  <span id="cooler2Span" class="slider round"></span>
 </label>
 </p>
 </div>
 <div class="peltier" onclick="turnOnLed()"><p>Cooler 3&nbsp;
 <label class="switch">
-  <input type="checkbox">
-  <span class="slider round"></span>
+  <input id="cooler3Check" type="checkbox">
+  <span id="cooler3Span" class="slider round"></span>
 </label>
 </p>
 </div>
 <div class="peltier" onclick="turnOnLed()"><p>Cooler 4&nbsp;
 <label class="switch">
-  <input type="checkbox">
-  <span class="slider round"></span>
+  <input id="cooler4Check" type="checkbox">
+  <span id="cooler4Span" class="slider round"></span>
 </label>
 </p>
 </div>
 <div class="peltier" onclick="turnOnLed()"><p>Cooler 5&nbsp;
 <label class="switch">
-  <input type="checkbox">
-  <span class="slider round"></span>
+  <input id="cooler5Check" type="checkbox">
+  <span id="cooler5Span" class="slider round"></span>
 </label>
 </p>
 </div>
 <div class="peltier" onclick="turnOnLed()"><p>Cooler 6&nbsp;
 <label class="switch">
-  <input type="checkbox">
-  <span class="slider round"></span>
+  <input id="cooler6Check" type="checkbox">
+  <span id="cooler6Span" class="slider round"></span>
 </label>
 </p>
 </div>
 <div class="peltier" onclick="turnOnLed()"><p>Cooler 7&nbsp;
 <label class="switch">
-  <input type="checkbox">
-  <span class="slider round"></span>
+  <input id="cooler7Check" type="checkbox">
+  <span id="cooler7Span" class="slider round"></span>
 </label>
 </p>
 </div>
 <div class="peltier" onclick="turnOnLed()"><p>Cooler 8&nbsp;
 <label class="switch">
-  <input type="checkbox">
-  <span class="slider round"></span>
+  <input id="cooler8Check" type="checkbox">
+  <span id="cooler8Span" class="slider round"></span>
 </label>
 </p>
 </div>
@@ -116,8 +117,9 @@ var timer = setInterval( loadDoc, 100);
 }
 </script>
 
-
+<script src='/static/toogle.js'></script>
 <script>
+
 function loadDoc() {
   var xhttp = new XMLHttpRequest();
   xhttp.onreadystatechange = function() {
