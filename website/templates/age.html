@@ -20,7 +20,7 @@
     <th></th>
   </tr>
 <tr>
-    <th><p>Target temp:</p><input type="number" name="someid" /></th>
+    <th><p>Target temp:</p><input type="number" id="targetTemp" /></th>
     <th></th>
     <th></th>
   </tr>
@@ -29,11 +29,11 @@
 <table>
 <thead>
   <tr>
-	<th>Manual control: <p id="demo1"> here</p></th>
+	<th>Manual control: </th>
     <th>&nbsp;&nbsp; </th>
     <th><label class="switch">
 
-  <input type="checkbox" onclick="changeDemo();">
+  <input type="checkbox" id="ManualControl" onclick="changeMode()">
   <span class="slider round"></span>
 </label></th>
   </tr>
@@ -54,58 +54,80 @@
 <div class="peltier-wrapper">
 
 
-<div  class="peltier " onclick="turnOnLed()"><p>Cooler 1&nbsp;
+<div class="peltier" ><p>Cooler 1&nbsp;
+
 <label class="switch">
-  <input id="cooler1Check"type="checkbox" onclick="">
+  <input id="cooler1Check" type="checkbox" onclick="sendToArd()">
   <span id="cooler1Span" class="slider round"></span>
 </label>
 </p>
 </div>
-<div class="peltier" onclick="turnOffLed()"><p>Cooler 2&nbsp;
-<label id="tjek" class="switch">
-  <input id="cooler2Check" type="checkbox";>
+
+
+<div class="peltier" ><p>Cooler 2&nbsp;
+
+<label class="switch">
+  <input id="cooler2Check" type="checkbox" onclick="sendToArd()">
   <span id="cooler2Span" class="slider round"></span>
 </label>
 </p>
 </div>
-<div class="peltier" onclick="turnOnLed()"><p>Cooler 3&nbsp;
+
+
+<div class="peltier" ><p>Cooler 3&nbsp;
+
 <label class="switch">
-  <input id="cooler3Check" type="checkbox">
+  <input id="cooler3Check" type="checkbox" onclick="sendToArd()">
   <span id="cooler3Span" class="slider round"></span>
 </label>
 </p>
 </div>
-<div class="peltier" onclick="turnOnLed()"><p>Cooler 4&nbsp;
+
+
+<div class="peltier" ><p>Cooler 4&nbsp;
+
 <label class="switch">
-  <input id="cooler4Check" type="checkbox">
+  <input id="cooler4Check" type="checkbox" onclick="sendToArd()">
   <span id="cooler4Span" class="slider round"></span>
 </label>
 </p>
 </div>
-<div class="peltier" onclick="turnOnLed()"><p>Cooler 5&nbsp;
+
+
+<div class="peltier" ><p>Cooler 5&nbsp;
+
 <label class="switch">
-  <input id="cooler5Check" type="checkbox">
+  <input id="cooler5Check" type="checkbox" onclick="sendToArd()">
   <span id="cooler5Span" class="slider round"></span>
 </label>
 </p>
 </div>
-<div class="peltier" onclick="turnOnLed()"><p>Cooler 6&nbsp;
+
+
+<div class="peltier" ><p>Cooler 6&nbsp;
+
 <label class="switch">
-  <input id="cooler6Check" type="checkbox">
+  <input id="cooler6Check" type="checkbox" onclick="sendToArd()">
   <span id="cooler6Span" class="slider round"></span>
 </label>
 </p>
 </div>
-<div class="peltier" onclick="turnOnLed()"><p>Cooler 7&nbsp;
+
+
+<div class="peltier" ><p>Cooler 7&nbsp;
+
 <label class="switch">
-  <input id="cooler7Check" type="checkbox">
+  <input id="cooler7Check" type="checkbox" onclick="sendToArd()">
   <span id="cooler7Span" class="slider round"></span>
 </label>
 </p>
 </div>
-<div class="peltier" onclick="turnOnLed()"><p>Cooler 8&nbsp;
+
+
+<div class="peltier" ><p>Cooler 8&nbsp;
+
 <label class="switch">
-  <input id="cooler8Check" type="checkbox">
+  <input id="cooler8Check" type="checkbox" onclick="sendToArd()">
   <span id="cooler8Span" class="slider round"></span>
 </label>
 </p>

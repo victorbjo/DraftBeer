@@ -2,10 +2,8 @@ from flask import Flask, render_template,request
 app = Flask(__name__)
 import random
 import socket
-from smbus import SMBus
 import i2ctest as ic
-addr = 0x8 # bus address
-bus = SMBus(1) # indicates /dev/ic2-1
+
 s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 s.connect(("8.8.8.8", 80))
 print(s.getsockname()[0])
@@ -42,22 +40,11 @@ def cakes():
             tempsCount =+ 1
     y = temps[0]
     return render_template('cakes.html', cake = y)
-@app.route('/ledOn',methods = ['GET'])
-def ledOn():
-
-    return render_template('index.html')
-@app.route('/ledOff',methods = ['GET'])
-def ledOff():
-   
-    return render_template('index.html')
-
 @app.route('/demo',methods = ['GET'])
 def demo():
     coolerGet = str(request.args.get("coolerStates"))
     tempGet = str(request.args.get("temp"))
-    coolers  = "00111010"
-    temp = "32"
-    ic.sendToArd(coolers,temp)
+    ic.sendToArd(coolerGet,tempGet)
 
     return render_template('cakes.html', cake = coolerGet)
 if __name__ == '__main__':
