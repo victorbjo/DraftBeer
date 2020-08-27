@@ -1,153 +1,176 @@
 <!DOCTYPE html>
 <html>
-  <head>
-   <link rel="stylesheet" href='/static/mainstyle.css' />
-   <link rel="stylesheet" href='/static/slider.css' />
-   
-  </head>
+	<head>
+		<link rel="stylesheet" href='/static/mainstyle.css' />
+		<link rel="stylesheet" href='/static/slider.css' />
 
-  <body onload="loadDoc(),test(),loadDocs()">
-  <div class="div-main">
-<p> DraftBeer Interface</p>
-<div id="infoDiv" class="info-wrapper">
-<div class="info">
-<h3>Beer temperature</h3>
-<table>
-<thead>
-  <tr>
-    <th><p>Current temp:</p><br/><p id="beerTemp">The XMLHttpRequest Object</p></th>
-    <th></th>
-    <th></th>
-  </tr>
-<tr>
-    <th><p>Target temp:</p><input type="number" id="targetTemp" /></th>
-    <th></th>
-    <th></th>
-  </tr>
-</thead>
-</table>
-<table>
-<thead>
-  <tr>
-	<th>Manual control: </th>
-    <th>&nbsp;&nbsp; </th>
-    <th><label class="switch">
+	</head>
 
-  <input type="checkbox" id="ManualControl" onclick="changeMode()">
-  <span class="slider round"></span>
-</label></th>
-  </tr>
-</thead>
-</table>
+	<body onload="loadDoc(),test(),updateData()">
+		<div class="div-main">
+			<p> DraftBeer Interface</p>
+			<div id="infoDiv" class="info-wrapper">
+				<div class="info">
+					<h3>Beer temperature</h3>
+					<table>
+						<thead>
+							<tr>
+								<th>
+									<p>Current temp:</p>
+									<br/>
+									<p id="beerTemp">The XMLHttpRequest Object</p>
+								</th>
+								<th/>
+								<th/>
+							</tr>
+							<tr>
+								<th>
+									<p>Target temp:</p>
+									<input type="number" id="targetTemp" value="12"/>
+								</th>
+								<th/>
+								<th/>
+							</tr>
+						</thead>
+					</table>
+					<table>
+						<thead>
+							<tr>
+								<th>Manual control: </th>
+								<th>&nbsp;&nbsp; </th>
+								<th>
+									<label class="switch">
 
-</div>
-<div class="info"><div>
-<h3 class="info-h3">Water temperatures<br/></h3></div>
-<p id="waterTemp">The XMLHttpRequest Object</p>
-</div>
-<div class="info">
-<h3 class="info-h3">Air temperature<br/></h3>
-<p id="airTemp">The XMLHttpRequest Object</p>
-</div>
-</div>
+										<input type="checkbox" id="manualControl" onclick="changeMode()">
+											<span class="slider round"/>
+										</label>
+									</th>
+								</tr>
+							</thead>
+						</table>
 
-<div class="peltier-wrapper">
+					</div>
+					<div class="info">
+						<div>
+							<h3 class="info-h3">Water temperatures<br/>
+							</h3>
+						</div>
+						<p id="waterTemp">The XMLHttpRequest Object</p>
+					</div>
+					<div class="info">
+						<h3 class="info-h3">Air temperature<br/>
+						</h3>
+						<p id="airTemp">The XMLHttpRequest Object</p>
+					</div>
+				</div>
 
-
-<div class="peltier" ><p>Cooler 1&nbsp;
-
-<label class="switch">
-  <input id="cooler1Check" type="checkbox" onclick="sendToArd()">
-  <span id="cooler1Span" class="slider round"></span>
-</label>
-</p>
-</div>
-
-
-<div class="peltier" ><p>Cooler 2&nbsp;
-
-<label class="switch">
-  <input id="cooler2Check" type="checkbox" onclick="sendToArd()">
-  <span id="cooler2Span" class="slider round"></span>
-</label>
-</p>
-</div>
+				<div class="peltier-wrapper">
 
 
-<div class="peltier" ><p>Cooler 3&nbsp;
+					<div class="peltier" >
+						<p>Cooler 1&nbsp;
 
-<label class="switch">
-  <input id="cooler3Check" type="checkbox" onclick="sendToArd()">
-  <span id="cooler3Span" class="slider round"></span>
-</label>
-</p>
-</div>
-
-
-<div class="peltier" ><p>Cooler 4&nbsp;
-
-<label class="switch">
-  <input id="cooler4Check" type="checkbox" onclick="sendToArd()">
-  <span id="cooler4Span" class="slider round"></span>
-</label>
-</p>
-</div>
+							<label class="switch">
+								<input id="cooler1Check" type="checkbox" onclick="sendToArd()">
+									<span id="cooler1Span" class="slider round"/>
+								</label>
+							</p>
+						</div>
 
 
-<div class="peltier" ><p>Cooler 5&nbsp;
+						<div class="peltier" >
+							<p>Cooler 2&nbsp;
 
-<label class="switch">
-  <input id="cooler5Check" type="checkbox" onclick="sendToArd()">
-  <span id="cooler5Span" class="slider round"></span>
-</label>
-</p>
-</div>
-
-
-<div class="peltier" ><p>Cooler 6&nbsp;
-
-<label class="switch">
-  <input id="cooler6Check" type="checkbox" onclick="sendToArd()">
-  <span id="cooler6Span" class="slider round"></span>
-</label>
-</p>
-</div>
+								<label class="switch">
+									<input id="cooler2Check" type="checkbox" onclick="sendToArd()">
+										<span id="cooler2Span" class="slider round"/>
+									</label>
+								</p>
+							</div>
 
 
-<div class="peltier" ><p>Cooler 7&nbsp;
+							<div class="peltier" >
+								<p>Cooler 3&nbsp;
 
-<label class="switch">
-  <input id="cooler7Check" type="checkbox" onclick="sendToArd()">
-  <span id="cooler7Span" class="slider round"></span>
-</label>
-</p>
-</div>
+									<label class="switch">
+										<input id="cooler3Check" type="checkbox" onclick="sendToArd()">
+											<span id="cooler3Span" class="slider round"/>
+										</label>
+									</p>
+								</div>
 
 
-<div class="peltier" ><p>Cooler 8&nbsp;
+								<div class="peltier" >
+									<p>Cooler 4&nbsp;
 
-<label class="switch">
-  <input id="cooler8Check" type="checkbox" onclick="sendToArd()">
-  <span id="cooler8Span" class="slider round"></span>
-</label>
-</p>
-</div>
-</div></div>
-<script>
+										<label class="switch">
+											<input id="cooler4Check" type="checkbox" onclick="sendToArd()">
+												<span id="cooler4Span" class="slider round"/>
+											</label>
+										</p>
+									</div>
+
+
+									<div class="peltier" >
+										<p>Cooler 5&nbsp;
+
+											<label class="switch">
+												<input id="cooler5Check" type="checkbox" onclick="sendToArd()">
+													<span id="cooler5Span" class="slider round"/>
+												</label>
+											</p>
+										</div>
+
+
+										<div class="peltier" >
+											<p>Cooler 6&nbsp;
+
+												<label class="switch">
+													<input id="cooler6Check" type="checkbox" onclick="sendToArd()">
+														<span id="cooler6Span" class="slider round"/>
+													</label>
+												</p>
+											</div>
+
+
+											<div class="peltier" >
+												<p>Cooler 7&nbsp;
+
+													<label class="switch">
+														<input id="cooler7Check" type="checkbox" onclick="sendToArd()">
+															<span id="cooler7Span" class="slider round"/>
+														</label>
+													</p>
+												</div>
+
+
+												<div class="peltier" >
+													<p>Cooler 8&nbsp;
+
+														<label class="switch">
+															<input id="cooler8Check" type="checkbox" onclick="sendToArd()">
+																<span id="cooler8Span" class="slider round"/>
+															</label>
+														</p>
+													</div>
+												</div>
+											</div>
+											<script>
 function test() {
-var timer = setInterval( loadDoc, 300);
-var timer1 = setInterval( loadDocs, 300);
+var timer = setInterval( loadDoc, 400);
 }
-</script>
+											</script>
 
-<script src='/static/toogle.js'></script>
-<script>
-function loadDocs() {
+											<script src='/static/toogle.js'/>
+											<script>
+function updateData() {
 
   var xhttp = new XMLHttpRequest();
-  var tempArray =["","",""];
+  var parsedData =[""];
 	var idArray = ["beerTemp","waterTemp","airTemp"];
-	var tempArrayCount = 0;
+	var parsedDataCount = 0;
+var coolerCheck =["cooler1Check","cooler2Check","cooler3Check","cooler4Check","cooler5Check","cooler6Check","cooler7Check","cooler8Check"];
+
   xhttp.onreadystatechange = function() {
 
     if (this.readyState == 4 && this.status == 200 ) {
@@ -155,18 +178,49 @@ function loadDocs() {
 	{
 		if (this.responseText[i] != ";")
 		{
-			tempArray[tempArrayCount] = tempArray[tempArrayCount]+this.responseText[i];
+			parsedData[parsedDataCount] = parsedData[parsedDataCount]+this.responseText[i];
 		}
 		else
 		{
-			tempArrayCount ++;
+			parsedDataCount ++;
+			parsedData.push("");
 		}
 	}
-	for (var i = 0; i < idArray.length; i++){
 
-	document.getElementById(idArray[i]).innerHTML = tempArray[i];
+	for (var i = 0; i < idArray.length; i++){
+	document.getElementById(idArray[i]).innerHTML = parsedData[i];
 
 }
+	if (parsedData[3]=="1"){
+	if (document.getElementById("manualControl").checked == false){
+//alert(document.getElementById("manualControl").checked);
+document.getElementById("manualControl").checked = true;		
+changeMode();
+
+	}else{
+document.getElementById("manualControl").checked = true;}
+
+}
+else{
+if (document.getElementById("manualControl").checked == true){
+//alert(document.getElementById("manualControl").checked);
+document.getElementById("manualControl").checked = false;		
+changeMode();
+
+	}
+else{
+document.getElementById("manualControl").checked = false;}
+	for (var i = 4; i < parsedData.length-2; i++){
+	if (parsedData[i] == "1"){
+	document.getElementById(coolerCheck[i-4]).checked = true;
+}else{
+document.getElementById(coolerCheck[i-4]).checked = false;
+}}
+
+
+}
+
+document.getElementById("targetTemp").value=parsedData[parsedData.length-2];
     }
   };
   xhttp.open("GET", "http://{{ip}}:80/test", true);
@@ -176,8 +230,7 @@ function loadDoc() {
   var xhttp = new XMLHttpRequest();
   xhttp.onreadystatechange = function() {
     if (this.readyState == 4 && this.status == 200 ) {
-      document.getElementById("demo").innerHTML =
-      this.responseText;
+      //document.getElementById("demo").innerHTML = this.responseText;
 	  console.log(this.responseText);
     }
   };
@@ -195,5 +248,5 @@ function turnOffLed() {
   xhttp.open("GET", "http://{{ip}}:80/ledOff", true);
   xhttp.send();
 }
-</script>
-  </body>
+																	</script>
+																</body>

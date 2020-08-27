@@ -42,14 +42,18 @@ def cakes():
     return render_template('cakes.html', cake = y)
 @app.route('/test',methods = ['GET'])
 def test():
-    temps = file.readFile("tempInfo.txt")
-    return render_template('info.html', beerTemp = temps[0], waterTemp = temps[1], airTemp = temps[2])
+    temps = file.readFile("tempInfo.txt") #Parsing what is essentially the DB
+    return render_template('info.html', beerTemp=temps[0], waterTemp=temps[1], airTemp=temps[2],
+                           mt=temps[3],t1=temps[4],t2=temps[5],t3=temps[6],t4=temps[7],t5=temps[8],
+                           t6=temps[9],t7=temps[10],t8=temps[11],actualTemp=temps[12]) #Renders a html template with data
 @app.route('/demo',methods = ['GET'])
 def demo():
     f = open("test.txt", "a")
     f.write("Opened\n")
     coolerGet = str(request.args.get("coolerStates"))
     tempGet = str(request.args.get("temp"))
+    if (tempGet == None or tempGet ==""):
+        tempGet = "00"
     ic.sendToArd(coolerGet,tempGet)
 
     return render_template('cakes.html', cake = coolerGet)
