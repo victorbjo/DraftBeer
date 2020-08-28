@@ -7,8 +7,10 @@ bus = SMBus(1) # indicates /dev/ic2-1
 
 def sendToArd(coolers, temp):
 
-        if int(temp)==0 or temp =="" or temp == None:
+        if float(temp)==0 or temp =="" or temp == None:
                 temp = "00"
+        if len(temp)==1:
+                temp = temp+"0"
         now = datetime.now()
         current_time = now.strftime("%H:%M:%S")
         from smbus import SMBus

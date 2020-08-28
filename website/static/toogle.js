@@ -17,7 +17,9 @@ function changeMode() {
 			document.getElementById(coolerSpans[i]).classList.add("slider");
 			document.getElementById(coolerCheck[i]).checked = false;
 		}
-	} 
+	}
+	
+	
 	sendToArd();
 }
 function sendToArd() {
