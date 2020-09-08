@@ -41,13 +41,17 @@
 </table>
 
 </div>
-<div class="info"><div>
-<h3 class="info-h3">Water temperatures<br/></h3></div>
-<p id="waterTemp">The XMLHttpRequest Object</p>
-</div>
-<div class="info">
+<div class="info-no-flex">
+<div>
+<h3 class="info-h3">Water temperature<br/></h3>
+</div><div>
+<table><thead>
+<th><p id="waterTemp">The XMLHttpRequest Object</p></th></thead></table>
+</div></div>
+<div class="info-no-flex">
 <h3 class="info-h3">Air temperature<br/></h3>
-<p id="airTemp">The XMLHttpRequest Object</p>
+<table><thead>
+<th><p id="airTemp">The XMLHttpRequest Object</p></th></thead></table>
 </div>
 </div>
 <input type="hidden" id="timer" value="false">
@@ -57,7 +61,7 @@
 <div class="peltier" ><p>Cooler 1&nbsp;
 
 <label class="switch">
-  <input id="cooler1Check" type="checkbox" onclick="stopTimer();sendToArd()">
+  <input id="cooler1Check" type="checkbox" onclick="sendToArd();stopTimer();">
   <span id="cooler1Span" class="slider round"></span>
 </label>
 </p>
@@ -148,7 +152,7 @@ interval = document.getElementById("timer").value;
 clearInterval(interval);
 }
 function startInterval() {
-var interval = setInterval(updateData,1000);
+var interval = setInterval(updateData,1500);
 document.getElementById("timer").value = interval;
 }
 

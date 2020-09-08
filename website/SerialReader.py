@@ -20,7 +20,7 @@ while True:
                parsedLine = parsedLine + line[x]+";"
             else:
                 semiCounter = semiCounter + 1
-    if len(parsedLine)>8:
+    if len(parsedLine)>15:
         f = open("tempInfo.txt", "a")
         temp = parsedLine[-4] +"."+parsedLine[-2]
         parsedLine = parsedLine[:-5]
