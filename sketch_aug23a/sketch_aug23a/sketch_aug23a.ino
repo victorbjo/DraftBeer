@@ -5,9 +5,24 @@
 const int ledPin = 13;
 char receivedMsg[13];
 int byteCounter = 0;
-int coolers[] = {5, 4, 7, 8, 9, 10, 11,12};
+int coolers[] = {5, 4, 7, 8, 9, 11, 12,13};
 float temperature;
 String mainToggle = "0";
+
+// Data wire is plugged into port 10 on the Arduino
+#define ONE_WIRE_BUS 10
+
+// Setup a oneWire instance to communicate with any OneWire devices (not just Maxim/Dallas temperature ICs)
+OneWire oneWire(ONE_WIRE_BUS);
+
+// Pass our oneWire reference to Dallas Temperature. 
+DallasTemperature sensors(&oneWire);
+
+// arrays to hold device address
+DeviceAddress airTemp =    {0x28, 0xAA, 0x79, 0x72, 0x48, 0x14, 0x01, 0x21};
+DeviceAddress coolingTemp = {0x28, 0xFF, 0x7F, 0xA4, 0x52, 0x15, 0x02, 0x76};
+DeviceAddress waterTemp = {0x28, 0xAA, 0x05, 0x79, 0x47, 0x14, 0x01, 0xA6};
+
 
 void setup() {
   // Join I2C bus as slave with address 8
@@ -15,6 +30,11 @@ void setup() {
   Serial.begin(9600);
   // Call receiveEvent when data received
   Wire.onReceive(receiveEvent);
+
+  sensors.setResolution(coolingTemp, 12);
+  sensors.setResolution(waterTemp, 12);
+  sensors.setResolution(airTemp, 12);
+
 
   // Setup pin 13 as output and turn LED off
   pinMode(ledPin, OUTPUT);
@@ -67,7 +87,8 @@ void receiveEvent(int howMany) {
 void loop() {
 delay(300);
 if (byteCounter==0){
-Serial.println("10:12:32:"+mainToggle+String(receivedMsg));
+Serial.println(String(sensors.getTempC(airTemp))+":"+String(sensors.getTempC(coolingTemp))
++":"+String(sensors.getTempC(waterTemp))+":"+mainToggle+String(receivedMsg));
 }
 
 }
