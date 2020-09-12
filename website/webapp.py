@@ -2,12 +2,8 @@ from flask import Flask, render_template,request
 app = Flask(__name__)
 import random
 import socket
-from smbus import SMBus
-import serial
-ser = serial.Serial('/dev/ttyUSB0', 115200, timeout=1)
-ser.flush()
-addr = 0x8 # bus address
-bus = SMBus(1) # indicates /dev/ic2-1
+import i2ctest as ic
+import fileParser as file
 s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 s.connect(("8.8.8.8", 80))
 print(s.getsockname()[0])
@@ -44,14 +40,22 @@ def cakes():
             tempsCount =+ 1
     y = temps[0]
     return render_template('cakes.html', cake = y)
-@app.route('/ledOn',methods = ['GET'])
-def ledOn():
-    bus.write_byte(addr, 0x1)
-    return render_template('index.html')
-@app.route('/ledOff',methods = ['GET'])
-def ledOff():
-    bus.write_byte(addr, 0x0)
-    return render_template('index.html')
+@app.route('/test',methods = ['GET'])
+def test():
+    temps = file.readFile("tempInfo.txt") #Parsing what is essentially the DB
+    return render_template('info.html', beerTemp=temps[0], waterTemp=temps[1], airTemp=temps[2],
+                           mt=temps[3],t1=temps[4],t2=temps[5],t3=temps[6],t4=temps[7],t5=temps[8],
+                           t6=temps[9],t7=temps[10],t8=temps[11],actualTemp=temps[12]) #Renders a html template with data
+@app.route('/demo',methods = ['GET'])
+def demo():
+    f = open("test.txt", "a")
+    f.write("Opened\n")
+    coolerGet = str(request.args.get("coolerStates"))
+    tempGet = str(request.args.get("temp"))
+    if (tempGet == None or tempGet ==""):
+        tempGet = "00"
+    ic.sendToArd(coolerGet,tempGet)
+
+    return render_template('cakes.html', cake = coolerGet)
 if __name__ == '__main__':
-    app.run(debug=False,port=80,host='0.0.0.0')
-    
+    app.run(debug=False,port=80,host='0.0.0.0')    

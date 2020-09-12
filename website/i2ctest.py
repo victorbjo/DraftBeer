@@ -1,24 +1,27 @@
 from smbus import SMBus
- 
+from datetime import datetime
+
+
 addr = 0x8 # bus address
 bus = SMBus(1) # indicates /dev/ic2-1
- 
-numb = 1
- 
-print ("Enter 1 for ON or 0 for OFF")
-while numb == 1:
- 
-        ledstate = input(">>>>   ")
-        bus.write_byte(addr, 0x02)
-        bus.write_byte(addr, 0x31)
-        bus.write_byte(addr, 0x31)
-        bus.write_byte(addr, 0x31)
-        bus.write_byte(addr, 0x31)
-        bus.write_byte(addr, 0x31)
-        bus.write_byte(addr, 0x31)
-        bus.write_byte(addr, 0x31)
-        bus.write_byte(addr, 0x31)
-        bus.write_byte(addr, 0x30)
-        bus.write_byte(addr, 0x34)
-        bus.write_byte(addr, 0x32)
-        bus.write_byte(addr, 0x04)
+
+def sendToArd(coolers, temp):
+
+        if float(temp)==0 or temp =="" or temp == None:
+                temp = "00"
+        if len(temp)==1:
+                temp = temp+"0"
+        now = datetime.now()
+        current_time = now.strftime("%H:%M:%S")
+        from smbus import SMBus
+        f = open("test.txt", "a")
+        f.write("0x01 "+coolers+" "+temp + " "+current_time+"\n")
+        
+        bus.write_byte(addr, 0x01)
+        for x in range(8):        
+                bus.write_byte(addr, int(ord(coolers[x])))
+        bus.write_byte(addr, 0x30)        
+        for i in range(2):
+                bus.write_byte(addr, int(ord(temp[i])))
+        bus.write_byte(addr, 0x01)
+        f.close()
