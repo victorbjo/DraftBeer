@@ -8,7 +8,7 @@ int byteCounter = 0;
 int coolers[] = {5, 4, 7, 8, 9, 11, 12,13};
 float temperature;
 String mainToggle = "0";
-
+float wantedTemp = 3;
 // Data wire is plugged into port 10 on the Arduino
 #define ONE_WIRE_BUS 10
 
@@ -50,6 +50,8 @@ void parseData(char tempChar[])
     {
       //If tempChar 1-8 = 3, then the arduino shall control the heaters
       mainToggle = "1";
+      digitalWrite(coolers[i-1], sensors.getTempC(waterTemp) < wantedTemp);
+      
     }
     else
     {
