@@ -1,4 +1,4 @@
-function changeMode() {
+function changeMode(ip) {
 	var coolerSpans =["cooler1Span","cooler2Span","cooler3Span","cooler4Span","cooler5Span","cooler6Span","cooler7Span","cooler8Span"];
 	var coolerCheck =["cooler1Check","cooler2Check","cooler3Check","cooler4Check","cooler5Check","cooler6Check","cooler7Check","cooler8Check"];
 	for (var i = 0; i < 8; i++){
@@ -20,16 +20,16 @@ function changeMode() {
 	}
 	
 	
-	sendToArd();
+	sendToArd(ip);
 }
-function sendToArd() {
+function sendToArd(ip) {
 
 var coolerCheck =["cooler1Check","cooler2Check","cooler3Check","cooler4Check","cooler5Check","cooler6Check","cooler7Check","cooler8Check"];
 var reader ="";
 if(document.getElementById("manualControl").checked){
 reader = "33333333";
-}
 
+}
 else{	
 for (var i = 0; i < 8; i++){
 	if(document.getElementById(coolerCheck[i]).checked){
@@ -58,6 +58,6 @@ if (temp[1] == "." || temp[1] == ","){
     }
   };
 
-  xhttp.open("GET", "http://192.168.0.247:80/demo?coolerStates="+reader+"&temp="+temp , true);
+  xhttp.open("GET", "http://"+ip+":80/demo?coolerStates="+reader+"&temp="+temp , true);
   xhttp.send();
 }

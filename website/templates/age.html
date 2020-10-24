@@ -20,7 +20,7 @@
     <th></th>
   </tr>
 <tr>
-    <th><p>Target temp:</p><input type="number" id="targetTemp" value="12" onfocus="stopTimerLong()" oninput="sendToArd()"onfocusout="startInterval();sendToArd()"/></th>
+    <th><p>Target temp:</p><input type="number" id="targetTemp" value="Empty" onfocus="stopTimerLong()" oninput="sendToArd('{{ip}}')"onfocusout="startInterval();sendToArd('{{ip}}')"/></th>
     <th></th>
     <th></th>
   </tr>
@@ -33,7 +33,7 @@
     <th>&nbsp;&nbsp; </th>
     <th><label class="switch">
 
-  <input type="checkbox" id="manualControl" onclick="stopTimer();changeMode()">
+  <input type="checkbox" id="manualControl" onclick="stopTimer();changeMode('{{ip}}')">
   <span class="slider round"></span>
 </label></th>
   </tr>
@@ -57,7 +57,7 @@
 <div class="peltier" ><p>Cooler 1&nbsp;
 
 <label class="switch">
-  <input id="cooler1Check" type="checkbox" onclick="stopTimer();sendToArd()">
+  <input id="cooler1Check" type="checkbox" onclick="stopTimer();sendToArd('{{ip}}');">
   <span id="cooler1Span" class="slider round"></span>
 </label>
 </p>
@@ -67,7 +67,7 @@
 <div class="peltier" ><p>Cooler 2&nbsp;
 
 <label class="switch">
-  <input id="cooler2Check" type="checkbox" onclick="stopTimer();sendToArd()">
+  <input id="cooler2Check" type="checkbox" onclick="stopTimer();sendToArd('{{ip}}')">
   <span id="cooler2Span" class="slider round"></span>
 </label>
 </p>
@@ -77,7 +77,7 @@
 <div class="peltier" ><p>Cooler 3&nbsp;
 
 <label class="switch">
-  <input id="cooler3Check" type="checkbox" onclick="stopTimer();sendToArd()">
+  <input id="cooler3Check" type="checkbox" onclick="stopTimer();sendToArd('{{ip}}')">
   <span id="cooler3Span" class="slider round"></span>
 </label>
 </p>
@@ -87,7 +87,7 @@
 <div class="peltier" ><p>Cooler 4&nbsp;
 
 <label class="switch">
-  <input id="cooler4Check" type="checkbox" onclick="stopTimer();sendToArd()">
+  <input id="cooler4Check" type="checkbox" onclick="stopTimer();sendToArd('{{ip}}')">
   <span id="cooler4Span" class="slider round"></span>
 </label>
 </p>
@@ -97,7 +97,7 @@
 <div class="peltier" ><p>Cooler 5&nbsp;
 
 <label class="switch">
-  <input id="cooler5Check" type="checkbox" onclick="stopTimer();sendToArd()">
+  <input id="cooler5Check" type="checkbox" onclick="stopTimer();sendToArd('{{ip}}')">
   <span id="cooler5Span" class="slider round"></span>
 </label>
 </p>
@@ -107,7 +107,7 @@
 <div class="peltier" ><p>Cooler 6&nbsp;
 
 <label class="switch">
-  <input id="cooler6Check" type="checkbox" onclick="stopTimer();sendToArd()">
+  <input id="cooler6Check" type="checkbox" onclick="stopTimer();sendToArd('{{ip}}')">
   <span id="cooler6Span" class="slider round"></span>
 </label>
 </p>
@@ -117,7 +117,7 @@
 <div class="peltier" ><p>Cooler 7&nbsp;
 
 <label class="switch">
-  <input id="cooler7Check" type="checkbox" onclick="stopTimer();sendToArd()">
+  <input id="cooler7Check" type="checkbox" onclick="stopTimer();sendToArd('{{ip}}')">
   <span id="cooler7Span" class="slider round"></span>
 </label>
 </p>
@@ -127,7 +127,7 @@
 <div class="peltier" ><p>Cooler 8&nbsp;
 
 <label class="switch">
-  <input id="cooler8Check" type="checkbox" onclick="stopTimer();sendToArd()">
+  <input id="cooler8Check" type="checkbox" onclick="stopTimer();sendToArd('{{ip}}')">
   <span id="cooler8Span" class="slider round"></span>
 </label>
 </p>
@@ -137,9 +137,10 @@
 function stopTimer(){
 
 interval = document.getElementById("timer").value;
-
+document.getElementById("timer").value = "Empty";
 clearInterval(interval);
 setTimeout(startInterval, 5000);
+
 }
 function stopTimerLong(){
 
@@ -148,8 +149,9 @@ interval = document.getElementById("timer").value;
 clearInterval(interval);
 }
 function startInterval() {
+if (document.getElementById("timer").value == "Empty"){
 var interval = setInterval(updateData,1000);
-document.getElementById("timer").value = interval;
+document.getElementById("timer").value = interval;}
 }
 
 </script>
@@ -190,7 +192,7 @@ var coolerCheck =["cooler1Check","cooler2Check","cooler3Check","cooler4Check","c
 	if (document.getElementById("manualControl").checked == false){
 //alert(document.getElementById("manualControl").checked);
 document.getElementById("manualControl").checked = true;		
-changeMode();
+changeMode('{{ip}}');
 		
 	}else{
 document.getElementById("manualControl").checked = true;}
@@ -200,7 +202,7 @@ else{
 if (document.getElementById("manualControl").checked == true){
 //alert(document.getElementById("manualControl").checked);
 document.getElementById("manualControl").checked = false;		
-changeMode();
+changeMode('{{ip}}');
 		
 	}
 else{
@@ -223,7 +225,7 @@ document.getElementById("targetTemp").value=tempArray[tempArray.length-2];
 }
 
 function loadDoc() {
-
+document.getElementById("timer").value = "Empty";
 }
 function turnOnLed() {
   var xhttp = new XMLHttpRequest();

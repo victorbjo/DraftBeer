@@ -25,8 +25,6 @@ def send():
 @app.route('/cakes',methods = ['GET'])
 def cakes():
     y = 0
-    
-    
     import numpy as np
     f = open("test.txt", "r")
     fread = f.read()
@@ -48,6 +46,7 @@ def test():
                            t6=temps[9],t7=temps[10],t8=temps[11],actualTemp=temps[12]) #Renders a html template with data
 @app.route('/demo',methods = ['GET'])
 def demo():
+    print("demo")
     f = open("test.txt", "a")
     f.write("Opened\n")
     coolerGet = str(request.args.get("coolerStates"))
