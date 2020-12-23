@@ -8,17 +8,25 @@
 
   <body onload="loadDoc(),startInterval(),updateData()">
   <div class="div-main">
-<p> DraftBeer Interface</p>
+<div style="line-height: 50%;">
+<p> iDrink </p>
+<br>
+<p class ="name"> By Bo &amp Victor Bjørholm </p>
+</div>
 <div id="infoDiv" class="info-wrapper">
 <div class="info">
-<h3>Beer temperature</h3>
+<h3>Beer Control</h3>
 <table>
 <thead>
-  <tr>
-    <th><p>Current temp:</p><br/><p id="beerTemp">The XMLHttpRequest Object</p></th>
-    <th></th>
-    <th></th>
-  </tr>
+<tr>
+<th>
+<p>Current temperature:</p><br/></th>
+</tr>
+</thead>
+</table>
+	<p id="beerTemp">The XMLHttpRequest Object</p>
+<table>
+<thead>  
 <tr>
     <th><p>Target temp:</p><input type="number" id="targetTemp" value="Empty" onfocus="stopTimerLong()" oninput="sendToArd('{{ip}}')"onfocusout="startInterval();sendToArd('{{ip}}')"/></th>
     <th></th>
@@ -42,12 +50,17 @@
 
 </div>
 <div class="info"><div>
-<h3 class="info-h3">Water temperatures<br/></h3></div>
+<h3 class="info-h3">Cooler temperature<br/></h3></div>
+<div>
 <p id="waterTemp">The XMLHttpRequest Object</p>
 </div>
+</div>
 <div class="info">
-<h3 class="info-h3">Air temperature<br/></h3>
+<h3 class="info-h3" id="infoAri">Ambient temperature<br/></h3>
+<br>
+<div>
 <p id="airTemp">The XMLHttpRequest Object</p>
+</div>
 </div>
 </div>
 <input type="hidden" id="timer" value="false">
@@ -114,22 +127,7 @@
 </div>
 
 
-<div class="peltier" ><p>Cooler 7&nbsp;
 
-<label class="switch">
-  <input id="cooler7Check" type="checkbox" onclick="stopTimer();sendToArd('{{ip}}')">
-  <span id="cooler7Span" class="slider round"></span>
-</label>
-</p>
-</div>
-
-
-<div class="peltier" ><p>Cooler 8&nbsp;
-
-<label class="switch">
-  <input id="cooler8Check" type="checkbox" onclick="stopTimer();sendToArd('{{ip}}')">
-  <span id="cooler8Span" class="slider round"></span>
-</label>
 </p>
 </div>
 </div></div>
@@ -166,7 +164,7 @@ function updateData() {
   var tempArray =[""];
 	var idArray = ["beerTemp","waterTemp","airTemp"];
 	var tempArrayCount = 0;
-var coolerCheck =["cooler1Check","cooler2Check","cooler3Check","cooler4Check","cooler5Check","cooler6Check","cooler7Check","cooler8Check"];
+var coolerCheck =["cooler1Check","cooler2Check","cooler3Check","cooler4Check","cooler5Check","cooler6Check"];
 
   xhttp.onreadystatechange = function() {
 
@@ -183,9 +181,9 @@ var coolerCheck =["cooler1Check","cooler2Check","cooler3Check","cooler4Check","c
 			tempArray.push("");
 		}
 	}
-
+	document.getElementById(idArray[1]).innerHTML = "OK";
 	for (var i = 0; i < idArray.length; i++){
-	document.getElementById(idArray[i]).innerHTML = tempArray[i];
+	document.getElementById(idArray[i]).innerHTML = tempArray[i] + "&#186";
 	
 }
 	if (tempArray[3]=="1"){
@@ -195,7 +193,8 @@ document.getElementById("manualControl").checked = true;
 changeMode('{{ip}}');
 		
 	}else{
-document.getElementById("manualControl").checked = true;}
+document.getElementById("manualControl").checked = true;
+}
 
 }
 else{
@@ -207,12 +206,14 @@ changeMode('{{ip}}');
 	}
 else{
 document.getElementById("manualControl").checked = false;}
-	for (var i = 4; i < tempArray.length-2; i++){
-	if (tempArray[i] == "1"){
-	document.getElementById(coolerCheck[i-4]).checked = true;
-}else{
-document.getElementById(coolerCheck[i-4]).checked = false;
-}}
+	for (var i = 4; i < tempArray.length-4; i++){
+		if (tempArray[i] == "1"){
+			document.getElementById(coolerCheck[i-4]).checked = true;
+		}
+		else{
+			document.getElementById(coolerCheck[i-4]).checked = false;
+		}
+	}
 
 
 }

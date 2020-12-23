@@ -2,18 +2,12 @@ from flask import Flask, render_template,request
 app = Flask(__name__)
 import random
 import socket
-import i2ctest as ic
 import fileParser as file
+import parser
+import SerialHandler
 s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 s.connect(("8.8.8.8", 80))
 print(s.getsockname()[0])
-import RPi.GPIO as GPIO # Import Raspberry Pi GPIO library
-GPIO.setwarnings(False) # Ignore warning for now
-GPIO.setmode(GPIO.BOARD) # Use physical pin numbering
-GPIO.setup(8, GPIO.IN, pull_up_down=GPIO.PUD_DOWN) # Set pin 10 to be an input
-GPIO.setup(10, GPIO.OUT)
-
-
 
 
 @app.route('/',methods = ['GET'])
@@ -40,10 +34,16 @@ def cakes():
     return render_template('cakes.html', cake = y)
 @app.route('/test',methods = ['GET'])
 def test():
-    temps = file.readFile("tempInfo.txt") #Parsing what is essentially the DB
-    return render_template('info.html', beerTemp=temps[0], waterTemp=temps[1], airTemp=temps[2],
+    SerialHandler.getTemps()
+    temps = parser.readFile() #Parsing what is essentially the DB
+    return render_template('info.html', beerTemp=temps[8], waterTemp=temps[9], airTemp=temps[10],
+                           mt=temps[0],t1=temps[2],t2=temps[3],t3=temps[4],t4=temps[5],t5=temps[6],
+                           t6=temps[7],t7=1,t8=1,actualTemp=temps[1]) #Renders a html template with data
+
+    '''return render_template('info.html', beerTemp=temps[0], waterTemp=temps[1], airTemp=temps[2],
                            mt=temps[3],t1=temps[4],t2=temps[5],t3=temps[6],t4=temps[7],t5=temps[8],
                            t6=temps[9],t7=temps[10],t8=temps[11],actualTemp=temps[12]) #Renders a html template with data
+'''
 @app.route('/demo',methods = ['GET'])
 def demo():
     print("demo")
@@ -53,8 +53,9 @@ def demo():
     tempGet = str(request.args.get("temp"))
     if (tempGet == None or tempGet ==""):
         tempGet = "00"
-    ic.sendToArd(coolerGet,tempGet)
-
+    #print("Coolerget" + str(coolerGet))
+    #print("TempGet" + str(tempGet))
+    SerialHandler.changeUnitStatus(coolerGet, tempGet)
     return render_template('cakes.html', cake = coolerGet)
 if __name__ == '__main__':
     app.run(debug=False,port=80,host='0.0.0.0')    

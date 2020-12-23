@@ -1,7 +1,7 @@
 function changeMode(ip) {
-	var coolerSpans =["cooler1Span","cooler2Span","cooler3Span","cooler4Span","cooler5Span","cooler6Span","cooler7Span","cooler8Span"];
-	var coolerCheck =["cooler1Check","cooler2Check","cooler3Check","cooler4Check","cooler5Check","cooler6Check","cooler7Check","cooler8Check"];
-	for (var i = 0; i < 8; i++){
+	var coolerSpans =["cooler1Span","cooler2Span","cooler3Span","cooler4Span","cooler5Span","cooler6Span"];
+	var coolerCheck =["cooler1Check","cooler2Check","cooler3Check","cooler4Check","cooler5Check","cooler6Check"];
+	for (var i = 0; i < 6; i++){
 		if (document.getElementById(coolerSpans[i]).classList.contains('slider')){
 
 			document.getElementById(coolerSpans[i]).classList.remove('slider');
@@ -24,14 +24,14 @@ function changeMode(ip) {
 }
 function sendToArd(ip) {
 
-var coolerCheck =["cooler1Check","cooler2Check","cooler3Check","cooler4Check","cooler5Check","cooler6Check","cooler7Check","cooler8Check"];
+var coolerCheck =["cooler1Check","cooler2Check","cooler3Check","cooler4Check","cooler5Check","cooler6Check"];
 var reader ="";
 if(document.getElementById("manualControl").checked){
 reader = "33333333";
 
 }
 else{	
-for (var i = 0; i < 8; i++){
+for (var i = 0; i < 6; i++){
 	if(document.getElementById(coolerCheck[i]).checked){
 		reader = reader + "1";
 	}

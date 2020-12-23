@@ -1,9 +1,11 @@
 body{
 background-color:#000000;
 font-size:50pt;
-font-family:Courier New;
+font-family:SF Pro Text,SF Pro Icons,AOS Icons,Helvetica Neue,Helvetica,Arial,sans-serif;
 color:#eeeeee;
 padding-left:2vw;
+padding-top:2vh;
+
 }
 input{
 	border:3px;
@@ -28,7 +30,7 @@ display: inline-block;
 
 background-color:#1a1a1a;
 border:0px;
-height:13vw;
+height:14vw;
 width:42vw;
 max-height:60vh;
 font-size: 50px;
@@ -78,6 +80,7 @@ padding-bottom:5vw;
 	margin-top:50px;
 	align-content:flex-end;
 	align-items:flex-end;
+	
 
 }
 .info{
@@ -86,6 +89,7 @@ flex-direction: coloumn;
 background-color:#1a1a1a;
 border:0px;
 flex-wrap:wrap;
+flex-flow: column wrap;
 width:94vw;
 
 font-size: 50px;
@@ -102,6 +106,9 @@ text-align:center;
 }
 .table-unit{
 	text-align:left;
+}
+.name{
+font-size:25pt;
 }
 
 
