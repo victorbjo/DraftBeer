@@ -3,6 +3,7 @@ import serial
 import time
 import updateDB as db
 from datetime import datetime
+start = [255, 255, 253, 0]
 ser = serial.Serial(
         port='/dev/ttyS0', #Replace ttyS0 with ttyAM0 for Pi1,Pi2,Pi0
         baudrate = 57600,
@@ -17,8 +18,11 @@ def param2Temp(params):
 def listen():
     count=0
     line = [0x02,0x02,0x02,0x02,0x02]
+    print("ISAI")
     while True:
         line[count] = ser.read()
+        print("AM HERE")
+        print(line)
         if (line[count]):
             a = 0
         else:
@@ -41,6 +45,8 @@ def listen():
                 params = [None] * (ord(packet[4])-7)
                 for i in range(ord(packet[4])-7):                    
                     params[i] = ord(packet[i+6])
+                print("asd")
+                print(packet)
                 return params
                 print(";;;")
             break
@@ -53,6 +59,7 @@ start = [255, 255, 253, 0]
 def changeUnitStatus(state, temp):
     
     if (int(state[0])!=3):
+        print("Changing units. FUCK ME")
         ser.write(serial.to_bytes([0xff,0xff,0xfd,0x00,0xd,0x3,int(state[0]),int(state[1])
                                ,int(state[2]),int(state[3]),int(state[4]),int(state[5]),0xfe]))
         time.sleep(0.1)
@@ -70,10 +77,10 @@ def changeUnitStatus(state, temp):
 def getTemps():
     now = datetime.now()
     current_time = now.strftime("%S")
-    if (int(current_time)%10 == 0):
+    if (int(current_time)%5 == 0):
         ser.write(serial.to_bytes([0xff,0xff,0xfd,0x00,0xa,0x1,0x9,0x9,0x9,0xfe]))
         params = listen()
-        print(params)
+        #print(params)
         temps = param2Temp(params)
         #print(temps)
         db.writeTmp("toPi.txt",temps)

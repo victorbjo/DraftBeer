@@ -5,6 +5,7 @@ import socket
 import fileParser as file
 import parser
 import SerialHandler
+import restore as Restore
 s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 s.connect(("8.8.8.8", 80))
 print(s.getsockname()[0])
@@ -13,9 +14,12 @@ print(s.getsockname()[0])
 @app.route('/',methods = ['GET'])
 @app.route('/send',methods = ['GET','POST'])
 def send():
-    if request.method == 'POST':
-        return render_template('age.html',age=3, ip=s.getsockname()[0])
-    return render_template('index.html')
+    return render_template('age.html',age=3, ip=s.getsockname()[0])
+
+@app.route('/restore',methods = ['GET'])
+def restore():
+    Restore.allFiles()
+    return render_template('age.html',age=3, ip=s.getsockname()[0])
 @app.route('/cakes',methods = ['GET'])
 def cakes():
     y = 0
@@ -34,7 +38,7 @@ def cakes():
     return render_template('cakes.html', cake = y)
 @app.route('/test',methods = ['GET'])
 def test():
-    SerialHandler.getTemps()
+    #SerialHandler.getTemps()
     temps = parser.readFile() #Parsing what is essentially the DB
     return render_template('info.html', beerTemp=temps[8], waterTemp=temps[9], airTemp=temps[10],
                            mt=temps[0],t1=temps[2],t2=temps[3],t3=temps[4],t4=temps[5],t5=temps[6],

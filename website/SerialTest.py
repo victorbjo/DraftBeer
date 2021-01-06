@@ -23,6 +23,7 @@ def listen():
     line = [0x02,0x02,0x02,0x02,0x02]
     while True:
         line[count] = ser.read()
+        print(line)
         if (line[count]):
             a = 0
         else:
@@ -45,12 +46,14 @@ def listen():
                 params = [None] * (ord(packet[4])-7)
                 for i in range(ord(packet[4])-7):                    
                     params[i] = ord(packet[i+6])
+                print("asd")
+                print(packet)
                 return params
                 print(";;;")
             break
         count += 1
-        
-while True:
+  
+#while True:
     '''count=0
     line = [0x02,0x02,0x02,0x02,0x02]
     while True:
@@ -84,26 +87,36 @@ while True:
         count += 1'''
 
 
-    a = input()
-    #ser.write(serial.to_bytes([0xff,0xff,0xfd,0x00,0xa,0x1,0x9,0x9,0x9,0xfe]))
-    if a == 1:
+while True:
+    time.sleep(3)
+    try:
         time.sleep(.3)
         ser.write(serial.to_bytes([0xff,0xff,0xfd,0x00,0xa,0x1,0x9,0x9,0x9,0xfe]))
         params = listen()
         print(params)
+        print("HERE")
         temps = param2Temp(params)
-        #print(temps)
+        print(temps)
         db.writeTmp("toPi.txt",temps)
-        time.sleep(.3)
-        ser.write(serial.to_bytes([0xff,0xff,0xfd,0x00,0x08,0x2,0x9,0xfe]))
-        params = listen()
-        print(params)
-        db.updateUnits("toPi.txt",params)
+        #time.sleep(.3)
+        #ser.write(serial.to_bytes([0xff,0xff,0xfd,0x00,0x08,0x2,0x9,0xfe]))
+        #params = listen()
+        #print(params)
+        #db.updateUnits("toPi.txt",params)
         #db.writeTmp("toPi.txt",temps)
+    except:
+        print("Did not receive expected pckg")
+        while ser.in_waiting:  # Or: while ser.inWaiting():
+            a = ser.readline()
+        
+    '''
     elif a == 2:
         ser.write(serial.to_bytes([0xff,0xff,0xfd,0x00,0xd,0x3,0x1,0x1,0x1,0x0,0x0,0x1,0xfe]))
 
     elif a == 3:
-        ser.write(serial.to_bytes([0xff,0xff,0xfd,0x00,0xa,0x4,0x0,0x5,0x4,0xfe]))
+        ser.write(serial.to_bytes([0xff,0xff,0xfd,0x00,0xa,0x1,0x9,0x9,0x9,0xfe]))
+        while True:
+            print(ord(ser.read()))
     elif a == 4:
         ser.write(serial.to_bytes([0xff,0xff,0xfd,0x00,0xa,0x4,0x1,0x4,0x4,0xfe]))
+    '''

@@ -32,16 +32,23 @@ def auto(file, auto):
     f.close()
     #print(fAuto + fRest)
 def updateUnits(file,units):
-    f = open(file,"r")
-    ff = f.read()
-    f.close()
-    f = open(file, "w")
-    after = ff[:ff.find("C0")]
-    unitStr =""
-    for x in range(6):
-        unitStr += "C"+str(x)+":"+str(units[x])+";\n"
-    print(after)
-    f.write(after+unitStr)
+    if (units == None):
+        print("")
+    else:
+        print("updateUnits")
+        print(units)
+        print("")
+        f = open(file,"r")
+        ff = f.read()
+        f.close()
+        f = open(file, "w")
+        after = ff[:ff.find("C0")]
+        unitStr =""
+        for x in range(6):
+
+            unitStr += "C"+str(x)+":"+str(units[x])+";\n"
+        print(after+unitStr)
+        f.write(after+unitStr)
 def goalTemp(file, temp):
     f = open(file,"r")
     ff = f.read()

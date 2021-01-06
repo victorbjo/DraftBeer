@@ -1,4 +1,5 @@
 def readFile():
+    print("THIS IS A TEST \n  \n")
     f = open("toArd.txt", "r")
     fread = f.read()
     listOfEntries =[""] * 11
@@ -12,6 +13,7 @@ def readFile():
         fread = fread[fread.find(":")+1:]
         listOfEntries[x+8] = (fread[:fread.find(";")])
         fread = fread[fread.find(";"):]
+    #print(listOfEntries)
     return listOfEntries
 print(readFile())
         
