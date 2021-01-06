@@ -8,19 +8,27 @@
 
   <body onload="loadDoc(),startInterval(),updateData()">
   <div class="div-main">
-<p> DraftBeer Interface</p>
+<div style="line-height: 50%;">
+<p> EcDrink&nbsp &nbsp V0.9</p>
+<br>
+<p class ="name"> By Bo &amp Victor Bjørholm </p>
+</div>
 <div id="infoDiv" class="info-wrapper">
 <div class="info">
-<h3>Beer temperature</h3>
+<h3>Cooler Control</h3>
 <table>
 <thead>
-  <tr>
-    <th><p>Current temp:</p><br/><p id="beerTemp">The XMLHttpRequest Object</p></th>
-    <th></th>
-    <th></th>
-  </tr>
 <tr>
-    <th><p>Target temp:</p><input type="number" id="targetTemp" value="12" onfocus="stopTimerLong()" oninput="sendToArd()"onfocusout="startInterval();sendToArd()"/></th>
+<th>
+<p>Cooler temperature:</p><br/></th>
+</tr>
+</thead>
+</table>
+	<p id="beerTemp">The XMLHttpRequest Object</p>
+<table>
+<thead>  
+<tr>
+    <th><p>Target temp: &nbsp </p><input type="number" id="targetTemp" value="Empty" onfocus="stopTimerLong()" oninput="sendToArd('{{ip}}')"onfocusout="startInterval();sendToArd('{{ip}}')"/></th>
     <th></th>
     <th></th>
   </tr>
@@ -29,11 +37,9 @@
 <table>
 <thead>
   <tr>
-	<th>Manual control: </th>
-    <th>&nbsp;&nbsp; </th>
-    <th><label class="switch">
+	<th>Autopilot:&nbsp &nbsp <label class="switch">
 
-  <input type="checkbox" id="manualControl" onclick="stopTimer();changeMode()">
+  <input type="checkbox" id="manualControl" onclick="stopTimer();changeMode('{{ip}}')">
   <span class="slider round"></span>
 </label></th>
   </tr>
@@ -42,12 +48,16 @@
 
 </div>
 <div class="info"><div>
-<h3 class="info-h3">Water temperatures<br/></h3></div>
+<h3 class="info-h3">Hotside temperature<br/></h3></div>
+<div>
 <p id="waterTemp">The XMLHttpRequest Object</p>
 </div>
+</div>
 <div class="info">
-<h3 class="info-h3">Air temperature<br/></h3>
+<h3 class="info-h3" id="infoAri">Ambient temperature<br/></h3>
+<div>
 <p id="airTemp">The XMLHttpRequest Object</p>
+</div>
 </div>
 </div>
 <input type="hidden" id="timer" value="false">
@@ -57,7 +67,7 @@
 <div class="peltier" ><p>Cooler 1&nbsp;
 
 <label class="switch">
-  <input id="cooler1Check" type="checkbox" onclick="stopTimer();sendToArd()">
+  <input id="cooler1Check" type="checkbox" onclick="stopTimer();sendToArd('{{ip}}');">
   <span id="cooler1Span" class="slider round"></span>
 </label>
 </p>
@@ -67,7 +77,7 @@
 <div class="peltier" ><p>Cooler 2&nbsp;
 
 <label class="switch">
-  <input id="cooler2Check" type="checkbox" onclick="stopTimer();sendToArd()">
+  <input id="cooler2Check" type="checkbox" onclick="stopTimer();sendToArd('{{ip}}')">
   <span id="cooler2Span" class="slider round"></span>
 </label>
 </p>
@@ -77,7 +87,7 @@
 <div class="peltier" ><p>Cooler 3&nbsp;
 
 <label class="switch">
-  <input id="cooler3Check" type="checkbox" onclick="stopTimer();sendToArd()">
+  <input id="cooler3Check" type="checkbox" onclick="stopTimer();sendToArd('{{ip}}')">
   <span id="cooler3Span" class="slider round"></span>
 </label>
 </p>
@@ -87,7 +97,7 @@
 <div class="peltier" ><p>Cooler 4&nbsp;
 
 <label class="switch">
-  <input id="cooler4Check" type="checkbox" onclick="stopTimer();sendToArd()">
+  <input id="cooler4Check" type="checkbox" onclick="stopTimer();sendToArd('{{ip}}')">
   <span id="cooler4Span" class="slider round"></span>
 </label>
 </p>
@@ -97,7 +107,7 @@
 <div class="peltier" ><p>Cooler 5&nbsp;
 
 <label class="switch">
-  <input id="cooler5Check" type="checkbox" onclick="stopTimer();sendToArd()">
+  <input id="cooler5Check" type="checkbox" onclick="stopTimer();sendToArd('{{ip}}')">
   <span id="cooler5Span" class="slider round"></span>
 </label>
 </p>
@@ -107,29 +117,14 @@
 <div class="peltier" ><p>Cooler 6&nbsp;
 
 <label class="switch">
-  <input id="cooler6Check" type="checkbox" onclick="stopTimer();sendToArd()">
+  <input id="cooler6Check" type="checkbox" onclick="stopTimer();sendToArd('{{ip}}')">
   <span id="cooler6Span" class="slider round"></span>
 </label>
 </p>
 </div>
 
 
-<div class="peltier" ><p>Cooler 7&nbsp;
 
-<label class="switch">
-  <input id="cooler7Check" type="checkbox" onclick="stopTimer();sendToArd()">
-  <span id="cooler7Span" class="slider round"></span>
-</label>
-</p>
-</div>
-
-
-<div class="peltier" ><p>Cooler 8&nbsp;
-
-<label class="switch">
-  <input id="cooler8Check" type="checkbox" onclick="stopTimer();sendToArd()">
-  <span id="cooler8Span" class="slider round"></span>
-</label>
 </p>
 </div>
 </div></div>
@@ -137,9 +132,10 @@
 function stopTimer(){
 
 interval = document.getElementById("timer").value;
-
+document.getElementById("timer").value = "Empty";
 clearInterval(interval);
 setTimeout(startInterval, 5000);
+
 }
 function stopTimerLong(){
 
@@ -148,8 +144,9 @@ interval = document.getElementById("timer").value;
 clearInterval(interval);
 }
 function startInterval() {
+if (document.getElementById("timer").value == "Empty"){
 var interval = setInterval(updateData,1000);
-document.getElementById("timer").value = interval;
+document.getElementById("timer").value = interval;}
 }
 
 </script>
@@ -164,7 +161,7 @@ function updateData() {
   var tempArray =[""];
 	var idArray = ["beerTemp","waterTemp","airTemp"];
 	var tempArrayCount = 0;
-var coolerCheck =["cooler1Check","cooler2Check","cooler3Check","cooler4Check","cooler5Check","cooler6Check","cooler7Check","cooler8Check"];
+var coolerCheck =["cooler1Check","cooler2Check","cooler3Check","cooler4Check","cooler5Check","cooler6Check"];
 
   xhttp.onreadystatechange = function() {
 
@@ -181,36 +178,39 @@ var coolerCheck =["cooler1Check","cooler2Check","cooler3Check","cooler4Check","c
 			tempArray.push("");
 		}
 	}
-
+	document.getElementById(idArray[1]).innerHTML = "OK";
 	for (var i = 0; i < idArray.length; i++){
-	document.getElementById(idArray[i]).innerHTML = tempArray[i];
+	document.getElementById(idArray[i]).innerHTML = tempArray[i] + "&#186";
 	
 }
 	if (tempArray[3]=="1"){
 	if (document.getElementById("manualControl").checked == false){
 //alert(document.getElementById("manualControl").checked);
 document.getElementById("manualControl").checked = true;		
-changeMode();
+changeMode('{{ip}}');
 		
 	}else{
-document.getElementById("manualControl").checked = true;}
+document.getElementById("manualControl").checked = true;
+}
 
 }
 else{
 if (document.getElementById("manualControl").checked == true){
 //alert(document.getElementById("manualControl").checked);
 document.getElementById("manualControl").checked = false;		
-changeMode();
+changeMode('{{ip}}');
 		
 	}
 else{
 document.getElementById("manualControl").checked = false;}
-	for (var i = 4; i < tempArray.length-2; i++){
-	if (tempArray[i] == "1"){
-	document.getElementById(coolerCheck[i-4]).checked = true;
-}else{
-document.getElementById(coolerCheck[i-4]).checked = false;
-}}
+	for (var i = 4; i < tempArray.length-4; i++){
+		if (tempArray[i] == "1"){
+			document.getElementById(coolerCheck[i-4]).checked = true;
+		}
+		else{
+			document.getElementById(coolerCheck[i-4]).checked = false;
+		}
+	}
 
 
 }
@@ -223,7 +223,7 @@ document.getElementById("targetTemp").value=tempArray[tempArray.length-2];
 }
 
 function loadDoc() {
-
+document.getElementById("timer").value = "Empty";
 }
 function turnOnLed() {
   var xhttp = new XMLHttpRequest();
