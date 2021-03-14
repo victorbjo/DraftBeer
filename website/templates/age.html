@@ -1,240 +1,333 @@
 <!DOCTYPE html>
 <html>
-  <head>
-   <link rel="stylesheet" href='/static/mainstyle.css' />
-   <link rel="stylesheet" href='/static/slider.css' />
-   
-  </head>
 
-  <body onload="loadDoc(),startInterval(),updateData()">
-  <div class="div-main">
-<div style="line-height: 50%;">
-<p> EcDrink&nbsp &nbsp V0.9</p>
-<br>
-<p class ="name"> By Bo &amp Victor Bjørholm </p>
-</div>
-<div id="infoDiv" class="info-wrapper">
-<div class="info">
-<h3>Cooler Control</h3>
-<table>
-<thead>
-<tr>
-<th>
-<p>Cooler temperature:</p><br/></th>
-</tr>
-</thead>
-</table>
-	<p id="beerTemp">The XMLHttpRequest Object</p>
-<table>
-<thead>  
-<tr>
-    <th><p>Target temp: &nbsp </p><input type="number" id="targetTemp" value="Empty" onfocus="stopTimerLong()" oninput="sendToArd('{{ip}}')"onfocusout="startInterval();sendToArd('{{ip}}')"/></th>
-    <th></th>
-    <th></th>
-  </tr>
-</thead>
-</table>
-<table>
-<thead>
-  <tr>
-	<th>Autopilot:&nbsp &nbsp <label class="switch">
+<head>
+    <link rel="stylesheet" href='/static/mainstyle.css' />
+    <link rel="stylesheet" href='/static/slider.css' />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.min.js"></script>
 
-  <input type="checkbox" id="manualControl" onclick="stopTimer();changeMode('{{ip}}')">
-  <span class="slider round"></span>
-</label></th>
-  </tr>
-</thead>
-</table>
+</head>
 
-</div>
-<div class="info"><div>
-<h3 class="info-h3">Hotside temperature<br/></h3></div>
-<div>
-<p id="waterTemp">The XMLHttpRequest Object</p>
-</div>
-</div>
-<div class="info">
-<h3 class="info-h3" id="infoAri">Ambient temperature<br/></h3>
-<div>
-<p id="airTemp">The XMLHttpRequest Object</p>
-</div>
-</div>
-</div>
-<input type="hidden" id="timer" value="false">
-<div class="peltier-wrapper">
+<body onload="loadDoc(),updateTemp(),startInterval(),getTempHis(),readTarget,getEstimate()">
+    <div class="div-main">
+        <div style="line-height: 50%;">
+            <p> EcDrink&nbsp &nbsp V1.9</p>
+            <p class="name"> &nbsp&nbspPowered by </p>
+            <p class="name AI"> &nbspAI</p>
+            <br>
+            <p class="name"> By Bo &amp Victor Bjørholm </p>
+            <br>
 
+        </div>
+        <div id="infoDiv" class="info-wrapper">
+            <div class="info">
+                <h3>Cooler Control</h3>
+                <table>
+                    <thead>
+                        <tr>
 
-<div class="peltier" ><p>Cooler 1&nbsp;
+                            <th>
+                                <p>Cooler temperature:</p><br />
+                            </th>
+                        </tr>
+                    </thead>
+                </table>
+                <p id="beerTemp" class="data">Beer</p>
 
-<label class="switch">
-  <input id="cooler1Check" type="checkbox" onclick="stopTimer();sendToArd('{{ip}}');">
-  <span id="cooler1Span" class="slider round"></span>
-</label>
-</p>
-</div>
+                <table>
+                    <thead>
+                        <tr>
 
+                            <th>
+                                <p>Target temp: &nbsp </p><input type="number" id="targetTemp" value="Empty"
+                                    onfocus="stopTimerLong()" oninput="updateTarget()" onfocusout="startInterval();" />
+                            </th>
+                            <th></th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                </table>
+                <div class="break">
 
-<div class="peltier" ><p>Cooler 2&nbsp;
+                </div>
+                <table>
+                    <thead>
+                        <tr>
 
-<label class="switch">
-  <input id="cooler2Check" type="checkbox" onclick="stopTimer();sendToArd('{{ip}}')">
-  <span id="cooler2Span" class="slider round"></span>
-</label>
-</p>
-</div>
-
-
-<div class="peltier" ><p>Cooler 3&nbsp;
-
-<label class="switch">
-  <input id="cooler3Check" type="checkbox" onclick="stopTimer();sendToArd('{{ip}}')">
-  <span id="cooler3Span" class="slider round"></span>
-</label>
-</p>
-</div>
-
-
-<div class="peltier" ><p>Cooler 4&nbsp;
-
-<label class="switch">
-  <input id="cooler4Check" type="checkbox" onclick="stopTimer();sendToArd('{{ip}}')">
-  <span id="cooler4Span" class="slider round"></span>
-</label>
-</p>
-</div>
-
-
-<div class="peltier" ><p>Cooler 5&nbsp;
-
-<label class="switch">
-  <input id="cooler5Check" type="checkbox" onclick="stopTimer();sendToArd('{{ip}}')">
-  <span id="cooler5Span" class="slider round"></span>
-</label>
-</p>
-</div>
-
-
-<div class="peltier" ><p>Cooler 6&nbsp;
-
-<label class="switch">
-  <input id="cooler6Check" type="checkbox" onclick="stopTimer();sendToArd('{{ip}}')">
-  <span id="cooler6Span" class="slider round"></span>
-</label>
-</p>
-</div>
+                            <th>
+                                <p>Target ETA: </p>
+                            </th>
+                            <th></th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                </table>
+                <p id="ETA" class="data">13:05</p>
 
 
 
-</p>
-</div>
-</div></div>
-<script>
-function stopTimer(){
+            </div>
+            <div class="info">
+                <div>
+                    <h3 class="info-h3">Hotside temperature<br /></h3>
+                </div>
+                <div>
+                    <p id="waterTemp">The XMLHttpRequest Object</p>
+                </div>
+            </div>
+            <div class="info">
+                <h3 class="info-h3" id="infoAri">Ambient temperature<br /></h3>
+                <div>
+                    <p id="airTemp">The XMLHttpRequest Object</p>
+                </div>
+            </div>
 
-interval = document.getElementById("timer").value;
-document.getElementById("timer").value = "Empty";
-clearInterval(interval);
-setTimeout(startInterval, 5000);
+            <input type="hidden" id="timer" value="false">
 
-}
-function stopTimerLong(){
+            <div class="info">
 
-interval = document.getElementById("timer").value;
+                <canvas id="myChart" width="2000" height="1200"></canvas>
+                <script>
+                    var ctx = document.getElementById('myChart').getContext('2d');
+                    Chart.defaults.global.defaultFontColor = '#aeaeae';
+                    Chart.defaults.global.defaultFontSize = 48;
+                    Chart.defaults.global.defaultFont = 'SF Pro Text';
+                    Chart.defaults.global.defaultFontStyle = 'bold';
 
-clearInterval(interval);
-}
-function startInterval() {
-if (document.getElementById("timer").value == "Empty"){
-var interval = setInterval(updateData,1000);
-document.getElementById("timer").value = interval;}
-}
+                    var myChart = new Chart(ctx, {
+                        type: 'line',
 
-</script>
+                        data: {
+                            labels: ['-90s', '-80s', '-70s', '-60s', '-50s', '-40s', '-30s', '-20s', '-10s', '0s'],
 
-<script src='/static/toogle.js'></script>
-<script>
+                            datasets: [{
+                                label: 'Beer Temp',
+                                data: [16, 15, 14, 12, 10, 3, 5, 2, 3, 10],
+                                backgroundColor: [
+                                    'rgba(0, 0, 40, 0.1)'
+                                ],
+                                pointRadius: 0,
+                                borderColor: [
+                                    'rgba(10, 10, 255, 1)',
+
+                                ],
+
+                                borderWidth: 8
+                            }]
+                        },
+                        options: {
+
+                            legend: {
+                                labels: {
+                                    boxWidth: 0,
+                                }
+                            },
+                            scales: {
+
+                                yAxes: [{
+                                    ticks: {
+                                        beginAtZero: true,
+                                        max: 25,
+                                        stepSize: 5
+                                    }
+                                }],
+                                xAxes: [{
+                                    ticks: {
+                                        maxTicksLimit: 4,
+                                        maxRotation: 0,
+                                        minRotation: 0
+                                    }
+                                }]
+                            }
+
+                        }
+                    });
+
+                </script>
+            </div>
+        </div>
+        <script>
+            function stopTimer() {
+
+                interval = document.getElementById("timer").value;
+                document.getElementById("timer").value = "Empty";
+                clearInterval(interval);
+                setTimeout(startInterval, 5000);
+
+            }
+            function stopTimerLong() {
+
+                interval = document.getElementById("timer").value;
+
+                clearInterval(interval);
+            }
+
+            function startInterval() {
+                setInterval(readTarget, 1000);
+                setInterval(updateTemp, 1000);
+                setInterval(updateGraph, 10000);
+                setInterval(getEstimate, 160000);
+            }
+
+        </script>
+
+        <script src='/static/toogle.js'></script>
+        <script>
 
 
-function updateData() {
 
-  var xhttp = new XMLHttpRequest();
-  var tempArray =[""];
-	var idArray = ["beerTemp","waterTemp","airTemp"];
-	var tempArrayCount = 0;
-var coolerCheck =["cooler1Check","cooler2Check","cooler3Check","cooler4Check","cooler5Check","cooler6Check"];
+            function updateTemp() {
+                var xhttp = new XMLHttpRequest();
+                xhttp.onreadystatechange = function () {
+                    var idArr = ["beerTemp", "waterTemp", "airTemp"];
+                    var tempArr = this.responseText.split(';');
+                    for (var i = 0; i < 3; i++) {
 
-  xhttp.onreadystatechange = function() {
+                        if (tempArr[i]) {
+                            var temp = parseFloat(tempArr[i]).toFixed(2);
+                            document.getElementById(idArr[i]).innerHTML = temp;//.getElementById("p1").value;
+                        }
+                    }
 
-    if (this.readyState == 4 && this.status == 200 ) {
-	for (var i = 0; i < this.responseText.length; i++)
-	{
-		if (this.responseText[i] != ";")
-		{
-			tempArray[tempArrayCount] = tempArray[tempArrayCount]+this.responseText[i];
-		}
-		else
-		{
-			tempArrayCount ++;
-			tempArray.push("");
-		}
-	}
-	document.getElementById(idArray[1]).innerHTML = "OK";
-	for (var i = 0; i < idArray.length; i++){
-	document.getElementById(idArray[i]).innerHTML = tempArray[i] + "&#186";
-	
-}
-	if (tempArray[3]=="1"){
-	if (document.getElementById("manualControl").checked == false){
-//alert(document.getElementById("manualControl").checked);
-document.getElementById("manualControl").checked = true;		
-changeMode('{{ip}}');
-		
-	}else{
-document.getElementById("manualControl").checked = true;
-}
+                };
+                xhttp.open("GET", "http://{{ip}}:80/temps", true);
+                xhttp.send();
+            }
 
-}
-else{
-if (document.getElementById("manualControl").checked == true){
-//alert(document.getElementById("manualControl").checked);
-document.getElementById("manualControl").checked = false;		
-changeMode('{{ip}}');
-		
-	}
-else{
-document.getElementById("manualControl").checked = false;}
-	for (var i = 4; i < tempArray.length-4; i++){
-		if (tempArray[i] == "1"){
-			document.getElementById(coolerCheck[i-4]).checked = true;
-		}
-		else{
-			document.getElementById(coolerCheck[i-4]).checked = false;
-		}
-	}
+            function getTempHis() { //Requests JSON for Graph
+                //Only to use when loading page. Otherwise server will go boom
+                var graphSize = 10;
+                var xhttp = new XMLHttpRequest();
+                xhttp.onreadystatechange = function () {
+                    myChart.data.datasets[0].borderColor = [
+                        'rgba(100, 10, 5, 1)',
+
+                    ];
+                    if (this.responseText != null && this.responseText != "") {
+                        jsonData = JSON.parse(this.responseText)
 
 
-}
 
-document.getElementById("targetTemp").value=tempArray[tempArray.length-2];
-    }
-  };
-  xhttp.open("GET", "http://{{ip}}:80/test", true);
-  xhttp.send();
-}
+                        for (var i = 0; i < jsonData.temp.length; i++) {
+                            if (myChart.data.datasets[0].data.length >= jsonData.temp.length) //Checks if there are more entries in graph data than json file
+                            //Keeps it from saving old data when updating Json files
+                            //Also makes it possible to have different sized JSON files without fuckin stuff up
+                            {
+                                myChart.data.datasets[0].data.shift();//Deletes the first object in the array to keep it from getting crowded
+                            }
+                            if (myChart.data.labels.length >= jsonData.time.length) {
+                                myChart.data.labels.shift();
+                            }
+                            myChart.data.datasets[0].data.push(jsonData.temp[i]); //Pushes [i] of json object (temp his) into the last place at the 
+                            myChart.data.labels.push(jsonData.time[i]);
+                        }
+                    }
 
-function loadDoc() {
-document.getElementById("timer").value = "Empty";
-}
-function turnOnLed() {
-  var xhttp = new XMLHttpRequest();
-  xhttp.open("GET", "http://{{ip}}:80/ledOn", true);
-  xhttp.send();
-}
+                    myChart.update();
+                };
+                xhttp.open("GET", "http://{{ip}}:80/test", true);
 
-function turnOffLed() {
-  var xhttp = new XMLHttpRequest();
-  xhttp.open("GET", "http://{{ip}}:80/ledOff", true);
-  xhttp.send();
-}
-</script>
-  </body>
+                xhttp.send();
+            }
+
+            function pruneGraph() {
+                if (myChart.data.datasets[0].data.length > 300) {
+                    for (var i = 0; i < 150; i++) {
+                        myChart.data.datasets[0].data.shift();
+                        myChart.data.labels.shift();
+                    }
+                    myChart.update();
+                }
+            }
+
+            function updateGraph() {
+                var temperature = document.getElementById("beerTemp").innerHTML;
+                var target = parseFloat(document.getElementById("targetTemp").value);
+                if (temperature != "Beer") {
+                    var d = new Date();
+                    var hour = d.getHours();
+                    var min = d.getMinutes();
+                    if (min < 10) {
+                        min = "0" + min;
+                    }
+                    if (hour < 10) {
+                        hour = "0" + hour;
+                    }
+
+
+                    time = hour + ":" + min;
+                    myChart.data.datasets[0].data.push(temperature);
+                    myChart.data.labels.push(time);
+                    myChart.data.datasets[0].data.shift();
+                    myChart.data.labels.shift();
+                    myChart.update();
+                    if (target + 4 > temperature) {
+                        pruneGraph();
+                    }
+                }
+            }
+
+            function loadDoc() {
+                document.getElementById("timer").value = "Empty";
+            }
+            function updateTarget() {
+
+                var xhttp = new XMLHttpRequest();
+                var target = document.getElementById("targetTemp").value;
+                xhttp.onreadystatechange = function () {
+
+
+                    if (this.responseText != null && this.responseText != "") {
+                        var jsonData = JSON.parse(this.responseText)
+                    }
+
+
+                };
+                xhttp.open("GET", "http://{{ip}}:80/updateTarget?target=" + target, true);
+
+                xhttp.send();
+            }
+
+            function readTarget() {
+
+                var xhttp = new XMLHttpRequest();
+
+                xhttp.onreadystatechange = function () {
+
+
+                    if (this.responseText != null && this.responseText != "") {
+
+                        var jsonData = JSON.parse(this.responseText)
+                        document.getElementById("targetTemp").value = jsonData.target;
+
+                    }
+
+
+                };
+                xhttp.open("GET", "http://{{ip}}:80/readTarget?target=2", true);
+
+                xhttp.send();
+            }
+            function getEstimate() {
+
+                var xhttp = new XMLHttpRequest();
+
+                xhttp.onreadystatechange = function () {
+
+
+                    if (this.responseText != null && this.responseText != "") {
+
+                        var jsonData = JSON.parse(this.responseText)
+                        document.getElementById("ETA").innerHTML = jsonData.estimate;
+
+                    }
+
+
+                };
+                xhttp.open("GET", "http://{{ip}}:80/estimate", true);
+
+                xhttp.send();
+            }
+
+        </script>
+</body>

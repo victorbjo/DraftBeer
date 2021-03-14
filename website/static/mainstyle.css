@@ -24,7 +24,17 @@ vertical-align: top;
 p{
 padding:0px;
 margin:0px;
+color:#aeaeae;
 display: inline-block;
+}
+.AI{
+	color: #ffffff !important;
+}
+.data{
+	padding-left: 4px;
+}
+.break{
+	height: 30px;
 }
 .peltier{
 
@@ -69,6 +79,7 @@ padding:0px;
 padding-top:2vw;
 padding-bottom:2vw;
 margin:0px;
+color:#aeaeae;
 }
 .info-h3{
 padding-bottom:5vw;
@@ -90,25 +101,32 @@ background-color:#1a1a1a;
 border:0px;
 flex-wrap:wrap;
 flex-flow: column wrap;
-width:94vw;
+width:90vw;
 
 font-size: 50px;
 padding-top:0px;
 padding-bottom:4vw;
-padding-left:3vw;
+padding-left:3.5vw;
 margin-bottom:3vw;
-margin-right:3vw;
+margin-right:2vw;
 border-radius:20px;
 }
+.chartss{
 
+background-color:#1a1a1a;
+
+}
 table{
 text-align:center;
 }
 .table-unit{
 	text-align:left;
 }
+.chart{
+
+background-color:#1a1a1a;
+
+}
 .name{
 font-size:25pt;
 }
-
-
