@@ -186,7 +186,12 @@
 
                         if (tempArr[i]) {
                             var temp = parseFloat(tempArr[i]).toFixed(2);
-                            document.getElementById(idArr[i]).innerHTML = temp;//.getElementById("p1").value;
+                            if (isNaN(temp) == false){
+                                document.getElementById(idArr[i]).innerHTML = temp;//.getElementById("p1").value;
+                            }
+                            else{
+                                console.log(isNaN(temp));
+                            }
                         }
                     }
 
@@ -207,7 +212,7 @@
                     if (this.responseText != null && this.responseText != "") {
                         jsonData = JSON.parse(this.responseText)
 
-
+                        alert(jsonData.time.length);
 
                         for (var i = 0; i < jsonData.temp.length; i++) {
                             if (myChart.data.datasets[0].data.length >= jsonData.temp.length) //Checks if there are more entries in graph data than json file
@@ -232,7 +237,9 @@
             }
 
             function pruneGraph() {
+                
                 if (myChart.data.datasets[0].data.length > 300) {
+                    //alert(myChart.data.datasets[0].data.length);
                     for (var i = 0; i < 150; i++) {
                         myChart.data.datasets[0].data.shift();
                         myChart.data.labels.shift();
@@ -276,14 +283,14 @@
                 var xhttp = new XMLHttpRequest();
                 var target = document.getElementById("targetTemp").value;
                 var temp = document.getElementById("beerTemp").innerHTML;
-                /*if (target <= parseFloat(temp)+0.5){
+                if (target <= parseFloat(temp)+0.5){
                     changeCoolerStatus(1);
                 }
                 else{
                     changeCoolerStatus(0);
                 }
-                Does not work due to latency issues
-                */
+                //Does not work due to latency issues
+                
                 xhttp.onreadystatechange = function () {
 
 
@@ -351,6 +358,9 @@
                 xhttp.open("GET", "http://{{ip}}:80/estimate", true);
 
                 xhttp.send();
+            }
+            function lengthOfThing(){
+                alert(myChart.data.datasets[0].data.length);
             }
 
         </script>

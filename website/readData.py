@@ -21,4 +21,4 @@ def printData():
 def getData3Min():
     jsonData = (np.load(path+"/data3Min.npz"))
     return jsonData
-
+print(jsonData10Sec['temp'].size)
