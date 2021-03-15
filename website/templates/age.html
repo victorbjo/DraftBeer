@@ -41,7 +41,7 @@
 
                             <th>
                                 <p>Target temp: &nbsp </p><input type="number" id="targetTemp" value="Empty"
-                                    onfocus="stopTimerLong()" oninput="updateTarget()" onfocusout="startInterval();" />
+                                    oninput="updateTarget()"  />
                             </th>
                             <th></th>
                             <th></th>
@@ -149,11 +149,10 @@
         </div>
         <script>
             function stopTimer() {
-
+                //alert(2);
                 interval = document.getElementById("timer").value;
-                document.getElementById("timer").value = "Empty";
                 clearInterval(interval);
-                setTimeout(startInterval, 5000);
+
 
             }
             function stopTimerLong() {
@@ -164,7 +163,8 @@
             }
 
             function startInterval() {
-                setInterval(readTarget, 1000);
+                var timer1 = setInterval(readTarget, 1000);
+                document.getElementById("timer").value = timer1;
                 setInterval(updateTemp, 1000);
                 setInterval(updateGraph, 10000);
                 setInterval(getEstimate, 160000);
@@ -275,6 +275,15 @@
 
                 var xhttp = new XMLHttpRequest();
                 var target = document.getElementById("targetTemp").value;
+                var temp = document.getElementById("beerTemp").innerHTML;
+                /*if (target <= parseFloat(temp)+0.5){
+                    changeCoolerStatus(1);
+                }
+                else{
+                    changeCoolerStatus(0);
+                }
+                Does not work due to latency issues
+                */
                 xhttp.onreadystatechange = function () {
 
 

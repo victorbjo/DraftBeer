@@ -28,7 +28,6 @@ def send():
 def temps():
     temps = temp.read_temp()
     return render_template('temp.html',temp0=temps,temp1=temps,temp2=temps, ip=s.getsockname()[0])
-    
 @app.route('/test',methods = ['GET','POST'])
 def test():
 
