@@ -21,13 +21,14 @@
         </div>
         <div id="infoDiv" class="info-wrapper">
             <div class="info">
-                <h3>Cooler Control</h3>
+                <h3>Cooler Control <img src="/static/coolingOff.png" class="coolerLogo" alt="coolerStatus" id="coolerStatus"></h3>
                 <table>
                     <thead>
                         <tr>
 
                             <th>
                                 <p>Cooler temperature:</p><br />
+                                 
                             </th>
                         </tr>
                     </thead>
@@ -299,7 +300,7 @@
 
                         var jsonData = JSON.parse(this.responseText)
                         document.getElementById("targetTemp").value = jsonData.target;
-
+                        changeCoolerStatus(jsonData.status);
                     }
 
 
@@ -307,6 +308,20 @@
                 xhttp.open("GET", "http://{{ip}}:80/readTarget?target=2", true);
 
                 xhttp.send();
+            }
+            function changeCoolerStatus(status){
+                imgStatus = document.getElementById("coolerStatus").src;
+                if (status == 0){
+                    if (imgStatus != "http://192.168.0.168/static/coolingOff.png"){
+                        document.getElementById("coolerStatus").src = "http://192.168.0.168/static/coolingOff.png";
+                    }
+
+                }
+                else{
+                    if (imgStatus == "http://192.168.0.168/static/coolingOff.png"){
+                        document.getElementById("coolerStatus").src = "http://192.168.0.168/static/coolingOn.png";
+                    }
+                }
             }
             function getEstimate() {
 

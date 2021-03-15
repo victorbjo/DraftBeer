@@ -8,7 +8,11 @@ tempLogger.py logs temp and timestamp every 10 seconds in one file, and every 3 
 tempRead.py can read temp from thermometers
 ANN.py to train neural network
 think.py to run a neural network
+coolerControl.py is the script that controls the logic behind the cooling
 
+/oldLogs is all the old filled logs (older than 1 hour)
+/static is all the JS and CSS and pictures
+/templates is the HTML templates
 
 
 
@@ -19,4 +23,7 @@ navigate into the folder
 sudo python3 homepage.py &
 
 In another terminal, to log temps
-python3 tempLogger.py&
+python3 tempLogger.py &
+
+In another terminal, to control the cooler
+python3 coolerControl.py &

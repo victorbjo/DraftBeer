@@ -10,7 +10,10 @@ import json
 from flask import jsonify
 import target
 import ai
-
+import RPi.GPIO as GPIO
+GPIO.setmode(GPIO.BCM)
+GPIO.setwarnings(False)
+GPIO.setup(14,GPIO.OUT)
 
 s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 s.connect(("8.8.8.8", 80))
@@ -25,6 +28,7 @@ def send():
 def temps():
     temps = temp.read_temp()
     return render_template('temp.html',temp0=temps,temp1=temps,temp2=temps, ip=s.getsockname()[0])
+    
 @app.route('/test',methods = ['GET','POST'])
 def test():
 
@@ -43,7 +47,7 @@ def charts():
 @app.route('/readTarget',methods = ['GET','POST'])
 
 def readTarget():
-    list ={'target':[target.readTarget()]}
+    list ={'target':[target.readTarget()],'status':[str(GPIO.input(14))]}
     return jsonify(list) #Returns JSON with list
 
 
