@@ -11,6 +11,7 @@ localTimeMin = str(localTime.tm_min)
 localTimeHour = str(localTime.tm_hour)
 localTimeSec = str(localTime.tm_sec)
 temps = tempRead.read_temp()
+temps = temps[0]
 temps = round(temps, 2)
 temps = format(temps, '.2f')
 
@@ -44,6 +45,7 @@ while True:
         
     if int(localTimeMin)%3 == 0 and fiveMin == False: #Will log every 3rd min, as long as it hasnt done so in same min
         temps = tempRead.read_temp()
+        temps = temps[0]
         temps = round(temps, 2)
         temps = format(temps, '.2f')
         timeStamp3Min = np.append(timeStamp3Min,[localTimeHour+":"+localTimeMin])
@@ -64,6 +66,7 @@ while True:
         
     if int(localTimeSec)%10 == 0:  #Will log every 10th sec
         temps = tempRead.read_temp()
+        temps = temps[0]
         temps = round(temps, 2)
         temps = format(temps, '.2f')
         timeStamp10Sec = np.append(timeStamp10Sec,[localTimeHour+":"+localTimeMin])

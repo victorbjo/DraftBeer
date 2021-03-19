@@ -18,8 +18,18 @@ coolerControl.py is the script that controls the logic behind the cooling
 
 README.txt is a description of the project, the files and how to start the webapp
 
+To install libraries:
+sudo apt-get update
+sudo apt-get upgrade
+
+sudo apt install python3
+sudo apt-get install python3-flask
+
+You should now be setup
+
 To run the website:
-navigate into the folder
+navigate into the project folder
+cd website
 sudo python3 homepage.py &
 
 In another terminal, to log temps

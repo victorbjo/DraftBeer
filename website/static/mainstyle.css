@@ -107,6 +107,7 @@ font-size: 50px;
 padding-top:0px;
 padding-bottom:4vw;
 padding-left:3.5vw;
+padding-right: 3.5vw;
 margin-bottom:3vw;
 margin-right:2vw;
 border-radius:20px;
@@ -138,4 +139,10 @@ font-size:25pt;
 }
 .story{
 	font-size: 20pt;
+}
+.explanatoryPic{
+	width: 100%;
+	margin-left: auto;
+	margin-right: auto;
+	display: block;
 }

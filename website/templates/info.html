@@ -3,7 +3,7 @@
 
 <head>
     <link rel="stylesheet" href='/static/mainstyle.css' />
-    <link rel="stylesheet" href='/static/slider.css' />
+    <link rel="stylesheet" href='/static/infopage.css' />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.min.js"></script>
 
 </head>
@@ -20,37 +20,70 @@
 
         </div>
         <div id="infoDiv" class="info-wrapper">
-            <div class="info">
+            <div class="info">          
+                <h3>Hvordan virker det?</h3>
+                <p class="story">
+                    Hele Fadølsanlægget består overordnet set af to dele. Der er det vandbad der køler en jernspiral ned hvori øllet løber.
+                    Og så er der den del der køler vandet i vandbadet. Vandbadet er omkring 17 liter, og jernspiralen er omkring 26 CM i diameter,
+                    11 cm høj uden 3D printede spacers, og tættere på 20 cm med dem.
+                    Baddet ligger isoleret i en flamingo kasse.<br>For at køle vandet bliver det ledt igennem et vandkølingsystem, der bliver aktivt kølet på den ene side af peltier elementerne.
+                    Peltier elementer er elektriske komponenter, der ved tilført strøm, flytter varme fra den ene side til den anden.
+                    Den ene side vil derfor blive meget kold, og den anden side utrolig varm.
+                    <br>Disse elementer sidder der 6 af. De trækker omkring 50 watt stykket, så omkring 300 watt bliver brugt alene på køling.
+                    Vandet i bassinet løber så igennem 6 vandkølings-blokke, som kan ses på billedet nede for, på den kolde side.
+                    Efter det har været igennem alle blokkene løber det tilbage til badet og køler øllen ned. Dette holder også bevægelse i vandet, og hjælper med at køle øllen hurtigt ned.
+                        Men den varme side af elementerne skal også køles ned, ellers bliver de for varme og brænder af, eller så bliver varmen langsomt overført til den kolde side.
+                        For at køle den varme side af elementerne af bliver der brugt endnu et vandkølings system. Dette system kører også igennem 6 blokke, men i stedet for at løbe ned
+                        i et kar med vand, løber det ud i 2 radiatorer med 2 blæsere på hver især.
+                        Til strøm styring sidder et Custom designed PCB, designet af Victor og Bo, der kan trække over 400 Watt.
+                        <br><br>Boardet bliver styret af en Arduino, som får kommandoer af en Raspberry Pi via en protokol designet af Victor.<br>
+                        <img src="/static/pictures/pcb.png" class="pcb" alt="coolerStatus"
+                        id="coolerStatus"><br>
+                        Hele hjemmesiden bliver hostet på samme Raspberry som styrer Arduinoen. Siden er kodet af Victor, med input fra Bo.
 
-                <h3>The idea</h3>
-                <p class="story">The whole idea behind this project originated in Croatia on summervaction 2019. Bo and Victor Bjørholm, tired after a hot day, ordered a radler in a cafe in Croatia.
-                    Never having seen this before, Victor was impressed that the cafe mixed the Radler themselves. 1 part Sprite, 1 part cold beer.
-                    Bo and Victor quickly engaged in discussion about makin a Radler mixing machine to use at their famous "Sommerfest".
-                    After long discussions, the project started becoming more and more advanced. The biggest problem to start with: Cooling the beer.
-                    <br>
-                    As it turned out cooling a beer is no trivial task. Especially if you do not want a noisy compressor. Bo and Victor quickly forgot all about the radler.
-                    Victor introduced Bo to peltier elements, of which Victor had little experience. Together they started drawing some sketches and calculating the needed power to cool the beer.
-                    As it turned out, homework is not that bad when beer is involved.
-                    
-                    By the end of the vacation Bo and Victor knew everything they had to, to get started on setting the project up, even the shopping cart was ready to go on eBay.
+                        <br><br> Hele dette setup trækker rundt regnet omkring 360 watt.
+                        <br> At ølanlægget EcCooler nu fungere som det skal, betyder dog ikke at der ikke er store ændringer på vej.
+                        EzDrink 2.0 er på færdig kodet. Dette nye kontrol system har nu en integreret kunstig intelligens der regner ud hvornår øllen er kold nok.
+                        <br> Nye moduler er allerede tegnet og ved at blive testet der forhåbentlig gør dette setup endnu bedre.
+                        Derudover vil der blive tilført omkring 50% ekstra kølekapacitet når de nye moduler bliver indført.
+                </p>
+            </div>
+        </div>
+        <div id="infoDiv" class="info-wrapper">
+            <div class="info">          
+                <h3>Ideen</h3>
+                <p class="story">
+                    Hele ideen bag projektet stammer fra en sommerferie i kroatien 2019. Bo og Victor Bjørholm, tørstige efter en varm dag bestilte en Radler på en cafe.
+                    Victor så for første gang en Radler blive blandet, og kunne ikke vente med at prøve det selv. 1 del øl, 1 del Sprite var hvad der skulle til. Bo og Victor begyndte herefter
+                    hurtigt at diskutere hvordan man kunne lave en Radler mixer maskine til deres kendte "Sommerfest". Efter mange diskussioner blev projektet mere og mere avanceret.
+                    Bare det at køle øllen ned viste sig at være en stor udfordring. <br> Det viste sig hurtigt at køle øl ikke var verdens nememste ting.
+                    Specielt ikke hvis man nægter at bruge en kompressor. Med denne nye udfordring glemte Bo og Victor hurtigt alt om Radleren.
+                    <br>Victor introducerede Bo for Peltier elementer, som Victor dog heller ikke kendte meget til.
+                    Sammen begyndte de at tegne og regne ud hvor meget varme der skulle flyttes for at forsyne en fest med øl.
+                    Inden ferien var ovre havde de kurven klar på eBay og vidste alt hvad de skulle inden projektet kunne begynde...
                 </p>
             </div>
         </div>
         <div id="infoDiv" class="info-wrapper">
             <div class="info">
 
-                <h3>Version 0.5 to 1.5</h3>
-                <p class="story">After some speedbumbs along the way (Victor moving to Aalborg), a prototype was up and working in Bo's office.
-                    No moving parts was involved and the protype was capable of cooling for around 3 seconds!!! Before overheating at around 60 deg.
-                    After countless setup's Bo and Victor figured out that passive cooling was not enough. They quickly bought supplies (On eBay once again), to water cool the cooling elements.
-                    They also had to create a form of power circuit. Bo designing the logic behind the circuit and Victor designing the actual PCB and buying it of JLCPCB. 5 custom powerboards capable of controlling more than 400 watts worth of peltier elements.
-                    <br/>
-                    This turned out to be the way to go. They were now able to freeze water in their setup.
-                    A finished prototype was finished litteraly the day before the deadline of Sommerfest 2019.
-                    The EcCooler was wildly popular and a great conversation starter. However Victor and Bo got one comment that the inner nerds in them could not tolerate.
-                    "Den er meget fed, men hvornår får den så WiFi?". This comment would not be soon forgotten.
-                    After the Sommerfest 2019 where ~50 litres of beer was drunk, it was clear that the coolers weren't efficient enough. However it could work for small gatherings.
-                    Bo's birthday 2020, the EcCooler had now been installed in a new bar. Ready for a small party. The EcCooler proved worse than ever, needing of a big upgrade.
+                <h3>Version 0.5 til 1.5</h3>
+                <p class="story">
+                    Efter nogle bump på vejen, Victor der flyttede tidligt hjemmefra, fik de endelig en prototype op at køre på Bo's kontor.
+                    Ingen bevægelige dele var brugt overhovedet, og prototypen kunne køle ned i omkring 3 sekunder. Derefter begyndte den dog hurtigt at overophede...
+                    <br>Efter utallige forsøg fandt de hurtigt ud af at passiv køling ikke var nok. eBay kurven blev hurtigt fyldt og inden længe havde de købt et helt vandkølings system.
+                    De skulle dog også have en måde at styre strømmen på. Bo designede kredsløbende, hvorefter Victor kunne designe PCB filerne til fabrikation i Kina.
+                    <br>
+                    Dette viste sig at være den rigtige metode. De var nu i stand til at køle længe nok til at fryse vand til is.
+                    <img src="/static/pictures/prototype.jpg" class="pcb" alt="coolerStatus"
+                    id="coolerStatus"><br>
+                    En "færdig" prototype blev færdiggjort og testet dagen før deadline. Sommer fest 2020.
+                    EcCooleren var velbesøgt, et fantastisk samtale emne. Dog fik anlæget en kommentar i sjov "Den er meget fed, men hvornår får den så WiFi?"
+                    Denne kommentar blev ikke let glemt.
+                    Efter sommerfest 2020, hvor omkring 20 liter øl blev drukket, var det tydeligt at den ikke kølede godt nok. Dog var det godt nok til små selskaber.
+                    Bo's fødseldagsfest 2020 beviste dog at dette heller ikke var sandt. Fadølsanlægget var værre end nogensinde. Det var begyndt at falde fra hinanden, grundet varmeændringer.<br>
+                    <img src="/static/pictures/V1.jpg" class="pcb" alt="coolerStatus"
+                    id="coolerStatus"><br>
                 </p>
             </div>
         </div>
@@ -58,27 +91,38 @@
             <div class="info">
 
                 <h3>The big upgrade</h3>
-                <p class="story">Some CAD drawings later, Bo and Victor had their next idea ready.
-                    Two watercooling systems running in parralel. One on each side of the peltier elements, as can be seen on the picture below.
-                    This removed the need to glue the cold side of the Peltier elements to the side of the metal tub as they had done earlier, which proved the wrong method at Bo's birthday.
-                    <br>Some wild guesses later Bo and Victor estimated between 33 and 10000 percent gain in the new system.
-                    After the first test run with the new system, the 10000% guess seemed to be the closest.
-                    Setting up the whole system, with 25% less cooling power the new system was able to cool the water in the tub in about 2 hours, compared to +10 hours with the earlier setup.
-                    <br> <br>After handling a pandemic like champs, Bo and Victor was ready to celebrate new years 2020, just the family and a few friends.
-                    Since Bo's birthday party 2019, and new years 2020 Victor and Bo had plenty of time to upgrade. Victor having made a complete new app for the EcCooler, just to spite the earlier comment.
-                    The EcCooler, while a bit noisy due to a faulty pump, proved better than ever. They had found the perfect recipe.                  
+                <p class="story">
+                    Nogle 3D design senere, havde Bo og Victor endelig den næste idé klar. To vandkølingsystemer der kører i parralel.
+                    En på hver side af peltier elementerne.<br>
+                    <img src="/static/coolers.png" class="explanatoryPic" alt="coolerStatus"
+                    id="coolerStatus">
+                    <br>
+                    Dette fjernede behovet for at lime den kolde side af Peltier elementet fast på metalkarret, hvilket Bo's fødselsdag viste var en dårlig ide.
+                    <br>Efter nogle vilde gæt og lidt beregninger, estimerede de det nye system til at være mellem 33 og 1000 procent bedre. Efter første test viste det sig at det rigtige tal lå tættest op af 1000%
+                    <br>
+                    <img src="/static/pictures/v2.jpg" class="pcb" alt="coolerStatus"
+                    id="coolerStatus"><br>
+                    Hele systemet, nu med 25% mindre køle elementer, kunne køle vandkarret ned til 2C på omkring 2,5 timer i modsætning det gamle som skulle tændes dagen før for at komme ned på 4 grader.
+                    <br> <br>
+                    Efter en brilliant håndtering af pandamien, var Bo og Victor klar til at fejre nytår bare familien og få venner.
+                    Mellem Bo's fødselsdag 2020 og Nytår havde de god tid til at lave en masse nyt. Nu havde anlægget WiFi! En komplet webapp kaldet EcDrink var lavet til at styre EcCooler.
+                    Mens EcCooler larmede lidt, grundet en dårlig pumpe, var systemet bedre end nogensinde før.
+                    <img src="/static/pictures/bar.jpg" class="pcb" alt="coolerStatus"
+                    id="coolerStatus"><br>                  
                 </p>
             </div>
         </div>
         <div id="infoDiv" class="info-wrapper">
             <div class="info">
 
-                <h3>EcDrink 2.0 and EcCooler 2.5</h3>
-                <p class="story">While newyears 2020 proved extremely succesful, Bo and Victor were already working on how to make the EcCooler smaller and more efficient.
-                    Talking about how to make it smaller and better, a new improved design of the 2.0 coolers were beginning to materialize in their minds.
-                    Victor having the brilliant idea to make it rackbased, was able to shrink the whole peltier setup with more than 66%, while adding 100% capacity.
-                    However a new site, or at least updated, had to be made for this upgrade. EcDrink 2.0 was made. The worlds first Draft Beer setup powered by an AI.
-                    Removing about half of the electronics in the process, as they had been iterated on aswell.
+                <h3>EcDrink 2.0 og EcCooler 2.5</h3>
+                <p class="story">
+                    Mens nytår 2020 var utrolig succefuld begyndte Bo og Victor hurtigt at arbejde på næste version.
+                    Nu skulle den være mere effektiv og mindre end før. Et nyt design begyndte at tegne sig for dem. De kom sammen på en ny måde at sætte peltier elementerne op på.
+                    Tegningerne tydede på en reduktion af areal på over 66%, mens der blev tilføjet 50% køleevne.<br>
+                    Dog skulle en ny webapp laves til dette system, da det der ikke var brug for individuel styring af elementerne længere.
+                    Webappen blev skrevet mere eller mindre fra bunden af, og erstattede to computere med en enkelt.
+                    EcDrink 2.0 var nu født. Verdens første Fadølsanlægs System med integreret Kunstig intelligens.
 
                     As of writing this 16/03/2021, no further process has been made than the CAD drawings for the EcCooler version 2.5. The EcDrink Version 2.0 is now done, looking better than ever and more capable.
                 </p>

@@ -25,13 +25,18 @@ print(s.getsockname()[0])
 def send():
     return render_template('age.html', ip=s.getsockname()[0])
 
+@app.route('/admin',methods = ['GET','POST'])
+def admin():
+    return render_template('admin.html', ip=s.getsockname()[0])
+
+
 @app.route('/info',methods = ['GET','POST'])
 def info():
     return render_template('info.html', ip=s.getsockname()[0])
 @app.route('/temps',methods = ['GET','POST'])
 def temps():
     temps = temp.read_temp()
-    return render_template('temp.html',temp0=temps,temp1=temps,temp2=temps, ip=s.getsockname()[0])
+    return render_template('temp.html',temp0=temps[0],temp1=temps[1],temp2=temps[2], ip=s.getsockname()[0])
 @app.route('/test',methods = ['GET','POST'])
 def test():
 

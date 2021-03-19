@@ -41,8 +41,8 @@
                         <tr>
 
                             <th>
-                                <p>Target temp: &nbsp </p><input type="number" id="targetTemp" value="Empty"
-                                    oninput="updateTarget()" />
+                                <p>Target temp: &nbsp </p><p id="targetTemp">00</p>
+                                    
                             </th>
                             <th></th>
                             <th></th>
@@ -259,7 +259,7 @@
 
             function updateGraph() {
                 var temperature = document.getElementById("beerTemp").innerHTML;
-                var target = parseFloat(document.getElementById("targetTemp").value);
+                var target = parseFloat(document.getElementById("targetTemp").innerHTML);
                 if (temperature != "Beer") {
                     var d = new Date();
                     var hour = d.getHours();
@@ -292,7 +292,7 @@
             function updateTarget() {
 
                 var xhttp = new XMLHttpRequest();
-                var target = document.getElementById("targetTemp").value;
+                var target = document.getElementById("targetTemp").innerHTML;
                 var temp = document.getElementById("beerTemp").innerHTML;
                 if (target <= parseFloat(temp) + 0.5) {
                     changeCoolerStatus(1);
@@ -326,7 +326,7 @@
                     if (this.responseText != null && this.responseText != "") {
 
                         var jsonData = JSON.parse(this.responseText)
-                        document.getElementById("targetTemp").value = jsonData.target;
+                        document.getElementById("targetTemp").innerHTML = jsonData.target;
                         changeCoolerStatus(jsonData.status);
                     }
 
