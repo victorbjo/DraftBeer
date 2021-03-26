@@ -28,12 +28,15 @@ def addTime(minutes):
 
 def prepareData():
     data = np.array([readData.getData3Min()['temp']])
+    data = np.array([data[0][-20:]])
+    print(data.size)
     #print(np.array([readData.getData3Min()['goal']]))
     tempArray = np.array([[str(float(target.readTarget())/10)]])
     buffer = np.array([[data[0][0]]])
     #print(tempArray)
-    while (data[0].size < 20):
+    while (data[0].size < 19):
         #print(data[0].size)
+        print(data[0].size)
         data = np.array([np.append(buffer, data)])
         #print(data[0].size)
     data = np.array([np.append(tempArray, data)])
@@ -44,6 +47,8 @@ def estimate():
     Y = 0
     #print(X.shape)
     X = X.astype(float)
+    print(X.size)
+    print("x")
     result = (think.think(X,Y,syn0,syn1,syn2,syn3,syn4,0.1,False))
     resultRounded = [0]*9
     for x in range(result[0].size):

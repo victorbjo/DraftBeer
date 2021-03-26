@@ -21,11 +21,15 @@ README.txt is a description of the project, the files and how to start the webap
 To install libraries:
 sudo apt-get update
 sudo apt-get upgrade
-
 sudo apt install python3
 sudo apt-get install python3-flask
+sudo apt install build-essential python-dev
+git clone http://github.com/adafruit/Adafruit_Python_DHT.git
+cd Adafruit_Python_DHT
+sudo python3 setup.py install
 
-You should now be setup
+cd Adafruit_Python_DHT
+
 
 To run the website:
 navigate into the project folder

@@ -10,8 +10,10 @@ localTime = time.localtime(time.time())
 localTimeMin = str(localTime.tm_min)
 localTimeHour = str(localTime.tm_hour)
 localTimeSec = str(localTime.tm_sec)
-temps = tempRead.read_temp()
-temps = temps[0]
+
+f = open("tempDataMain.txt","r")
+temps = float(f.read())
+f.close()
 temps = round(temps, 2)
 temps = format(temps, '.2f')
 
@@ -28,7 +30,7 @@ goalTemp3Min = np.array([target.readTarget()])
 goalTemp10sec = np.array([target.readTarget()])
 counterMin = 0 #To make sure that "old" date doesnt get deleted
 counterSec = 0 #same
-numOfEntries = 20#361 #Maximum number of entries in a dataset before it gets saved as an old
+numOfEntries = 361#361 #Maximum number of entries in a dataset before it gets saved as an old
 fiveMin = False
 
 while True:
@@ -44,8 +46,9 @@ while True:
 
         
     if int(localTimeMin)%3 == 0 and fiveMin == False: #Will log every 3rd min, as long as it hasnt done so in same min
-        temps = tempRead.read_temp()
-        temps = temps[0]
+        f = open("tempDataMain.txt","r")
+        temps = float(f.read())
+        f.close()
         temps = round(temps, 2)
         temps = format(temps, '.2f')
         timeStamp3Min = np.append(timeStamp3Min,[localTimeHour+":"+localTimeMin])
@@ -65,8 +68,9 @@ while True:
         
         
     if int(localTimeSec)%10 == 0:  #Will log every 10th sec
-        temps = tempRead.read_temp()
-        temps = temps[0]
+        f = open("tempDataMain.txt","r")
+        temps = float(f.read())
+        f.close()
         temps = round(temps, 2)
         temps = format(temps, '.2f')
         timeStamp10Sec = np.append(timeStamp10Sec,[localTimeHour+":"+localTimeMin])

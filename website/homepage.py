@@ -5,6 +5,7 @@ import socket
 import os
 import numpy as np
 from time import sleep
+import time
 import tempRead as temp
 import json
 from flask import jsonify
@@ -28,6 +29,10 @@ def send():
 @app.route('/admin',methods = ['GET','POST'])
 def admin():
     return render_template('admin.html', ip=s.getsockname()[0])
+
+@app.route('/images',methods = ['GET','POST'])
+def images():
+    return render_template('images.html', ip=s.getsockname()[0])
 
 
 @app.route('/info',methods = ['GET','POST'])

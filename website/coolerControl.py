@@ -9,23 +9,28 @@ GPIO.setup(14,GPIO.OUT)
 coolers = False
 while True:
     try:
-        temp = np.load("data10Sec.npz")
+
         tempTarget = target.readTarget()
         #actualTemp = tempRead.read_temp()
-        actualTemp = float(temp['temp'][-1])
-        #print(tryTemp[-1])
-        if float(tempTarget) < actualTemp + 0.5:
-            #print(actualTemp + 0.5)
-            if (coolers == False):
-                print("Turning ON coolers")
-                GPIO.output(14,GPIO.HIGH)
-                coolers = True
-        else:
-            if (coolers == True):
-                print("Turning OFF coolers")
-                GPIO.output(14,GPIO.LOW)
-                coolers = False
+        f = open("tempDataMain.txt","r")
+        actualTemp = float(f.read())
+        f.close()
+        if float(tempTarget) > actualTemp + 0.5 and GPIO.input(14) == 1:
+            print("Turning OFF coolers")
+            GPIO.output(14,GPIO.LOW)
+        elif float(tempTarget)< actualTemp and GPIO.input(14) == 0:
+            print("Turning ON coolers")
+            GPIO.output(14,GPIO.HIGH)
+        elif float(tempTarget) < actualTemp + 0.2 and GPIO.input(14) == 0:
+            GPIO.output(14,GPIO.HIGH)
+            print("Cycling hot water")
+            time.sleep(2)
+            GPIO.output(14,GPIO.LOW)
         time.sleep(0.5)
-    except:
+    except Exception as e:
+        print(e)
         print(tempTarget)
-        exit()
+        print(actualTemp)
+        #exit()
+
+
