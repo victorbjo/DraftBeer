@@ -3,34 +3,50 @@ import time
 import tempRead
 import target
 import numpy as np
+
 GPIO.setmode(GPIO.BCM)
 GPIO.setwarnings(False)
-GPIO.setup(14,GPIO.OUT)
+pumps = 14
+peltier = 15
+GPIO.setup(pumps,GPIO.OUT)
+GPIO.setup(peltier,GPIO.OUT)
+recentlyCycled = False
 coolers = False
 while True:
+    
     try:
-
         tempTarget = target.readTarget()
+        tempTarget = float(tempTarget)
+
         #actualTemp = tempRead.read_temp()
-        f = open("tempDataMain.txt","r")
-        actualTemp = float(f.read())
-        f.close()
-        if float(tempTarget) > actualTemp + 0.5 and GPIO.input(14) == 1:
+        actualTemp = tempRead.get_temp()
+        if tempTarget > actualTemp + 0.5 and GPIO.input(pumps) == 1:
             print("Turning OFF coolers")
-            GPIO.output(14,GPIO.LOW)
-        elif float(tempTarget)< actualTemp and GPIO.input(14) == 0:
+            GPIO.output(pumps,GPIO.LOW)
+            GPIO.output(peltier,GPIO.LOW)
+            recentlyCycled = False
+        elif tempTarget< actualTemp and GPIO.input(pumps) == 0:
             print("Turning ON coolers")
-            GPIO.output(14,GPIO.HIGH)
-        elif float(tempTarget) < actualTemp + 0.2 and GPIO.input(14) == 0:
-            GPIO.output(14,GPIO.HIGH)
+            GPIO.output(pumps,GPIO.HIGH)
+            GPIO.output(peltier,GPIO.HIGH)
+            recentlyCycled = False
+        elif tempTarget < actualTemp + 0.2 and GPIO.input(pumps) == 0 and recentlyCycled == False:
+            GPIO.output(pumps,GPIO.HIGH)
+            GPIO.output(peltier,GPIO.HIGH)
             print("Cycling hot water")
             time.sleep(2)
-            GPIO.output(14,GPIO.LOW)
-        time.sleep(0.5)
-    except Exception as e:
-        print(e)
-        print(tempTarget)
-        print(actualTemp)
-        #exit()
+            GPIO.output(pumps,GPIO.LOW)
+            GPIO.output(peltier,GPIO.LOW)
+            recentlyCycled = True
+        '''except Exception as e:
+            print("Failed to do it")
+            print(e)
+            print(type(tempTarget))
+            print(type(actualTemp))
+            print(type(GPIO.input(14)))
+            print("Failed to do it")
+            #exit()'''
+    except:
+        a = 2
 
 

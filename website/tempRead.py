@@ -3,8 +3,8 @@ from time import sleep
 os.system('modprobe w1-gpio')
 os.system('modprobe w1-therm')
 temp_sensor0 = '/sys/bus/w1/devices/28-0114485317aa/w1_slave'
-temp_sensor1 = '/sys/bus/w1/devices/28-0000079a27fb/w1_slave'  
-temp_sensor2 ='/sys/bus/w1/devices/28-0000079b4382/w1_slave' 
+temp_sensor1 = '/sys/bus/w1/devices/28-0114477905aa/w1_slave'  
+temp_sensor2 ='/sys/bus/w1/devices/28-0114487279aa/w1_slave' 
 def read_temp_raw(sensor):
 
    f = open(sensor, 'r')
@@ -30,10 +30,14 @@ def parse_temp(sensor):
 
 def read_temp():
    parsedTemp = parse_temp(temp_sensor0)
-   f = open("tempDataMain.txt","w")
-   f.write(str(parsedTemp))
-   f.close() 
    file = open("tempData.txt", "r")
    f = file.read()
    file.close()
    return(parsedTemp,f[:f.find(";")],f[f.find(";")+1:])
+def get_temp():
+   parsedTemp = parse_temp(temp_sensor0)
+   f = open("tempDataMain.txt","w")
+   f.write(str(parsedTemp))
+   f.close()
+   return parsedTemp
+print(get_temp())

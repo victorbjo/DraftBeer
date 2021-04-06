@@ -41,7 +41,7 @@ def info():
 @app.route('/temps',methods = ['GET','POST'])
 def temps():
     temps = temp.read_temp()
-    return render_template('temp.html',temp0=temps[0],temp1=temps[1],temp2=temps[2], ip=s.getsockname()[0])
+    return render_template('temp.html',temp0=temps[0],temp1=temps[2],temp2=temps[1], ip=s.getsockname()[0])
 @app.route('/test',methods = ['GET','POST'])
 def test():
 

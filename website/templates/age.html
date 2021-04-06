@@ -11,12 +11,14 @@
 <body onload="loadDoc(),updateTemp(),startInterval(),getTempHis(),readTarget,getEstimate()">
     <div class="div-main">
         <div style="line-height: 50%;">
-            <p> EcDrink&nbsp &nbsp V2.0</p>
-            <p class="name"> &nbsp&nbspPowered by </p>
-            <p class="name AI"> &nbspAI</p>
-            <br>
-            <p class="name"> By Bo &amp Victor Bjørholm </p>
-            <br>
+            <a href="/" class="titleText">
+                <p> EcDrink&nbsp &nbsp V2.0</p>
+                <p class="name"> &nbsp&nbspPowered by </p>
+                <p class="name AI"> &nbspAI</p>
+                <br>
+                <p class="name"> By Bo &amp Victor Bjørholm </p>
+                <br>
+            </a>
 
         </div>
         <div id="infoDiv" class="info-wrapper">
@@ -106,15 +108,15 @@
                                 label: 'Beer Temp',
                                 data: [16, 15, 14, 12, 10, 3, 5, 2, 3, 10],
                                 backgroundColor: [
-                                    'rgba(0, 0, 40, 0.1)'
+                                    'rgba(10, 10, 80, 0.12)'
                                 ],
                                 pointRadius: 0,
                                 borderColor: [
-                                    'rgba(10, 10, 255, 1)',
+                                    'rgba(25, 25, 255, 1)',
 
                                 ],
 
-                                borderWidth: 8
+                                borderWidth: 10
                             }]
                         },
                         options: {
@@ -128,8 +130,7 @@
 
                                 yAxes: [{
                                     ticks: {
-                                        beginAtZero: true,
-                                        max: 25,
+     
                                         stepSize: 5
                                     }
                                 }],
@@ -140,7 +141,8 @@
                                         minRotation: 0
                                     }
                                 }]
-                            }
+                            },
+                            
 
                         }
                     });
@@ -154,6 +156,8 @@
             </div>
             <div>
                 <p>For more info on this awesome project click <a href="/info"> here!</a></p>
+                
+                <p>All the pictures documenting the process and the different version can be seen <a href="/images"> here!</a></p>
             </div>
         </div>
         <script>
@@ -177,6 +181,7 @@
                 setInterval(updateTemp, 2000);
                 setInterval(updateGraph, 10000);
                 setInterval(getEstimate, 160000);
+                //setInterval(updateTarget, )
             }
 
         </script>
@@ -215,7 +220,7 @@
                 var xhttp = new XMLHttpRequest();
                 xhttp.onreadystatechange = function () {
                     myChart.data.datasets[0].borderColor = [
-                        'rgba(100, 10, 5, 1)',
+                        'rgba(255, 10, 5, 1)',
 
                     ];
                     if (this.responseText != null && this.responseText != "") {
@@ -275,7 +280,7 @@
                     time = hour + ":" + min;
                     myChart.data.datasets[0].data.push(temperature);
                     myChart.data.labels.push(time);
-                    if (myChart.data.labels.length > 150) {
+                    if (myChart.data.labels.length > 300) {
                         myChart.data.labels.shift();
                         myChart.data.datasets[0].data.shift();
                     }
@@ -328,6 +333,7 @@
                         var jsonData = JSON.parse(this.responseText)
                         document.getElementById("targetTemp").innerHTML = jsonData.target;
                         changeCoolerStatus(jsonData.status);
+                        
                     }
 
 
@@ -338,15 +344,17 @@
             }
             function changeCoolerStatus(status) {
                 imgStatus = document.getElementById("coolerStatus").src;
+                //alert(status);
                 if (status == 0) {
-                    if (imgStatus != "http://192.168.0.168/static/coolingOff.png") {
-                        document.getElementById("coolerStatus").src = "http://192.168.0.168/static/coolingOff.png";
+                    if (imgStatus != "http://{{ip}}/static/coolingOff.png") {
+                        document.getElementById("coolerStatus").src = "http://{{ip}}/static/coolingOff.png";
                     }
 
                 }
                 else {
-                    if (imgStatus == "http://192.168.0.168/static/coolingOff.png") {
-                        document.getElementById("coolerStatus").src = "http://192.168.0.168/static/coolingOn.png";
+                    
+                    if (imgStatus == "http://{{ip}}/static/coolingOff.png") {
+                        document.getElementById("coolerStatus").src = "http://{{ip}}/static/coolingOn.png";
                     }
                 }
             }

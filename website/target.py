@@ -5,3 +5,6 @@ def updateTarget(temp):
 def readTarget():
     f = open("targetTemp.txt", "r")
     return(f.read())
+def readTargetFloat():
+    f = open("targetTemp.txt", "r")
+    return(float(f.read()))

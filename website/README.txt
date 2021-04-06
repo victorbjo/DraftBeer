@@ -42,4 +42,6 @@ python3 tempLogger.py &
 In another terminal, to control the cooler
 python3 coolerControl.py &
 
+In another terminal, to ambient and cooler temp
+python3 saveTempData.py &
 

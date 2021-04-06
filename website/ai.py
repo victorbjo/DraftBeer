@@ -34,7 +34,7 @@ def prepareData():
     tempArray = np.array([[str(float(target.readTarget())/10)]])
     buffer = np.array([[data[0][0]]])
     #print(tempArray)
-    while (data[0].size < 19):
+    while (data[0].size < 20):  #19 or 20, ehh
         #print(data[0].size)
         print(data[0].size)
         data = np.array([np.append(buffer, data)])

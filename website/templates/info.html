@@ -11,12 +11,14 @@
 <body>
     <div class="div-main">
         <div style="line-height: 50%;">
-            <p> EcDrink&nbsp &nbsp V2.0</p>
-            <p class="name"> &nbsp&nbspPowered by </p>
-            <p class="name AI"> &nbspAI</p>
-            <br>
-            <p class="name"> By Bo &amp Victor Bjørholm </p>
-            <br>
+            <a href="/" class="titleText">
+                <p> EcDrink&nbsp &nbsp V2.0</p>
+                <p class="name"> &nbsp&nbspPowered by </p>
+                <p class="name AI"> &nbspAI</p>
+                <br>
+                <p class="name"> By Bo &amp Victor Bjørholm </p>
+                <br>
+            </a>
 
         </div>
         <div id="infoDiv" class="info-wrapper">
@@ -35,15 +37,16 @@
                         Men den varme side af elementerne skal også køles ned, ellers bliver de for varme og brænder af, eller så bliver varmen langsomt overført til den kolde side.
                         For at køle den varme side af elementerne af bliver der brugt endnu et vandkølings system. Dette system kører også igennem 6 blokke, men i stedet for at løbe ned
                         i et kar med vand, løber det ud i 2 radiatorer med 2 blæsere på hver især.
-                        Til strøm styring sidder et Custom designed PCB, designet af Victor og Bo, der kan trække over 400 Watt.
-                        <br><br>Boardet bliver styret af en Arduino, som får kommandoer af en Raspberry Pi via en protokol designet af Victor.<br>
+                        <del>Til strøm styring sidder et Custom designed PCB, designet af Victor og Bo, der kan trække over 400 Watt.
+                        <br><br>Boardet bliver styret af en Arduino, som får kommandoer af en Raspberry Pi via en protokol designet af Victor.<br></del>
                         <img src="/static/pictures/pcb.png" class="pcb" alt="coolerStatus"
                         id="coolerStatus"><br>
-                        Hele hjemmesiden bliver hostet på samme Raspberry som styrer Arduinoen. Siden er kodet af Victor, med input fra Bo.
-
+                        <del>Hele hjemmesiden bliver hostet på samme Raspberry som styrer Arduinoen. Siden er kodet af Victor, med input fra Bo.</del>
+                        Al styring af strøm og hele hostingen af hjemmesiden bliver kørt på en Raspberry Pi 3B+.
+                        Ovenpå den sidder et custom designed shield, med stik til thermometre og styring af op til 6 strømforsyninger.
                         <br><br> Hele dette setup trækker rundt regnet omkring 360 watt.
-                        <br> At ølanlægget EcCooler nu fungere som det skal, betyder dog ikke at der ikke er store ændringer på vej.
-                        EzDrink 2.0 er på færdig kodet. Dette nye kontrol system har nu en integreret kunstig intelligens der regner ud hvornår øllen er kold nok.
+                        <br> At ølanlægget EcCooler nu fungerer som det skal, betyder dog ikke at der ikke er store ændringer på vej.
+                        EzDrink 2.5 er på færdig kodet. Dette nye kontrol system har nu en integreret kunstig intelligens der regner ud hvornår øllen er kold nok.
                         <br> Nye moduler er allerede tegnet og ved at blive testet der forhåbentlig gør dette setup endnu bedre.
                         Derudover vil der blive tilført omkring 50% ekstra kølekapacitet når de nye moduler bliver indført.
                 </p>
@@ -104,7 +107,7 @@
                     id="coolerStatus"><br>
                     Hele systemet, nu med 25% mindre køle elementer, kunne køle vandkarret ned til 2C på omkring 2,5 timer i modsætning det gamle som skulle tændes dagen før for at komme ned på 4 grader.
                     <br> <br>
-                    Efter en brilliant håndtering af pandamien, var Bo og Victor klar til at fejre nytår bare familien og få venner.
+                    Efter en brilliant håndtering af pandemien, var Bo og Victor klar til at fejre nytår bare familien og få venner.
                     Mellem Bo's fødselsdag 2020 og Nytår havde de god tid til at lave en masse nyt. Nu havde anlægget WiFi! En komplet webapp kaldet EcDrink var lavet til at styre EcCooler.
                     Mens EcCooler larmede lidt, grundet en dårlig pumpe, var systemet bedre end nogensinde før.
                     <img src="/static/pictures/bar.jpg" class="pcb" alt="coolerStatus"
@@ -128,6 +131,15 @@
                 </p>
             </div>
         </div>
-
+        <div class="info">
+            <div>
+                <h3 class="info-h3">Additional info<br /></h3>
+            </div>
+            <div>
+                <p>To go back to the front page, click<a href="/"> here!</a></p>
+                
+                <p>All the pictures documenting the process and the different version can be seen <a href="/images"> here!</a></p>
+            </div>
+        </div>
 
 </body>
