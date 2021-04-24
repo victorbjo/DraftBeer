@@ -1,0 +1,47 @@
+File explanation:
+data10Sec.npz, log of temperature measured every 10 second in the last hour
+homepage.py main website
+readData.py can read log files
+target.py can read and write target temp to targetTemp.txt
+targetTemp.txt target temp is stored here for logic and sync purposes
+tempLogger.py logs temp and timestamp every 10 seconds in one file, and every 3 min in another
+tempRead.py can read temp from thermometers
+ANN.py to train neural network
+think.py to run a neural network
+coolerControl.py is the script that controls the logic behind the cooling
+
+/oldLogs is all the old filled logs (older than 1 hour)
+/static is all the JS and CSS and pictures
+/templates is the HTML templates
+
+
+
+README.txt is a description of the project, the files and how to start the webapp
+
+To install libraries:
+sudo apt-get update
+sudo apt-get upgrade
+sudo apt install python3
+sudo apt-get install python3-flask
+sudo apt install build-essential python-dev
+git clone http://github.com/adafruit/Adafruit_Python_DHT.git
+cd Adafruit_Python_DHT
+sudo python3 setup.py install
+
+cd Adafruit_Python_DHT
+
+
+To run the website:
+navigate into the project folder
+cd website
+sudo python3 homepage.py &
+
+In another terminal, to log temps
+python3 tempLogger.py &
+
+In another terminal, to control the cooler
+python3 coolerControl.py &
+
+In another terminal, to ambient and cooler temp
+python3 saveTempData.py &
+
