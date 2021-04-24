@@ -3,12 +3,9 @@ import think
 import readData
 import time
 import target
-syns = np.load('NN.npy')
-syn0 = syns[0]
-syn1 = syns[1]
-syn2 = syns[2]
-syn3 = syns[3]
-syn4 = syns[4]
+synss = np.load('NN.npy')
+syn0 = synss[0]
+syn1 = synss[1]
 #print(syn0.shape)
 print("loaded")
 print ("Ready!")
@@ -27,10 +24,14 @@ def addTime(minutes):
     return(str(localTimeHour)+":"+str(localTimeMin))
 
 def prepareData():
-    data = np.array([readData.getData3Min()['temp']])
+    data = np.array([readData.getData10Sec()['temp']]) #Loads last 20 data entries
+    #print(data)
+    #print("HERE")
     data = np.array([data[0][-20:]])
-    print(data.size)
+    print(data)
+    #print(data.size)
     #print(np.array([readData.getData3Min()['goal']]))
+    #print(data)
     tempArray = np.array([[str(float(target.readTarget())/10)]])
     buffer = np.array([[data[0][0]]])
     #print(tempArray)
@@ -39,7 +40,8 @@ def prepareData():
         print(data[0].size)
         data = np.array([np.append(buffer, data)])
         #print(data[0].size)
-    data = np.array([np.append(tempArray, data)])
+    data = np.array([np.append(data, tempArray)])
+    print (data)
     return data
 
 def estimate():
@@ -47,9 +49,10 @@ def estimate():
     Y = 0
     #print(X.shape)
     X = X.astype(float)
+    print(X)
     print(X.size)
     print("x")
-    result = (think.think(X,Y,syn0,syn1,syn2,syn3,syn4,0.1,False))
+    result = (think.think(X,Y,syn0,syn1,0.1,False))
     resultRounded = [0]*9
     for x in range(result[0].size):
         resultRounded[x]=int(round(result[0][x],0))
