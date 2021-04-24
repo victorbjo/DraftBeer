@@ -1,4 +1,4 @@
-import tempRead
+#import tempRead
 import time
 import numpy as np
 import os
@@ -21,4 +21,8 @@ def printData():
 def getData3Min():
     jsonData = (np.load(path+"/data3Min.npz"))
     return jsonData
-print(jsonData10Sec['temp'].size)
+def getData10Sec():
+    jsonData = (np.load(path+"/data10Sec.npz"))
+    return jsonData
+#print(jsonData10Sec['temp'].size)
+#printData()
