@@ -24,11 +24,11 @@ print(s.getsockname()[0])
 @app.route('/',methods = ['GET'])
 @app.route('/send',methods = ['GET','POST'])
 def send():
-    return render_template('age.html', ip=s.getsockname()[0])
+    return render_template('age.html', ip="87.63.151.63")#=s.getsockname()[0])
 
 @app.route('/admin',methods = ['GET','POST'])
 def admin():
-    return render_template('admin.html', ip=s.getsockname()[0])
+    return render_template('admin.html', ip="87.63.151.63")#ip=s.getsockname()[0])
 
 @app.route('/images',methods = ['GET','POST'])
 def images():
@@ -79,6 +79,6 @@ def estimate():
     return jsonify(list) #Returns JSON with list
 
 if __name__ == '__main__':
-    app.run(debug=False,port=80,host='0.0.0.0')    
+    app.run(debug=False,port=3080,host='0.0.0.0')    
 
 

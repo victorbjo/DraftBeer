@@ -205,7 +205,7 @@
                     }
 
                 };
-                xhttp.open("GET", "http://{{ip}}:80/temps", true);
+                xhttp.open("GET", "http://{{ip}}:3080/temps", true);
                 xhttp.send();
             }
 
@@ -240,7 +240,7 @@
 
                     myChart.update();
                 };
-                xhttp.open("GET", "http://{{ip}}:80/test", true);
+                xhttp.open("GET", "http://{{ip}}:3080/test", true);
 
                 xhttp.send();
             }
@@ -311,7 +311,7 @@
 
 
                 };
-                xhttp.open("GET", "http://{{ip}}:80/updateTarget?target=" + target, true);
+                xhttp.open("GET", "http://{{ip}}:3080/updateTarget?target=" + target, true);
 
                 xhttp.send();
             }
@@ -332,21 +332,21 @@
 
 
                 };
-                xhttp.open("GET", "http://{{ip}}:80/readTarget?target=2", true);
+                xhttp.open("GET", "http://{{ip}}:3080/readTarget?target=2", true);
 
                 xhttp.send();
             }
             function changeCoolerStatus(status) {
                 imgStatus = document.getElementById("coolerStatus").src;
                 if (status == 0) {
-                    if (imgStatus != "http://192.168.0.168/static/coolingOff.png") {
-                        document.getElementById("coolerStatus").src = "http://192.168.0.168/static/coolingOff.png";
+                    if (imgStatus != "/static/coolingOff.png") {
+                        document.getElementById("coolerStatus").src = "/static/coolingOff.png";
                     }
 
                 }
                 else {
-                    if (imgStatus == "http://192.168.0.168/static/coolingOff.png") {
-                        document.getElementById("coolerStatus").src = "http://192.168.0.168/static/coolingOn.png";
+                    if (imgStatus == "/static/coolingOff.png") {
+                        document.getElementById("coolerStatus").src = "/static/coolingOn.png";
                     }
                 }
             }
@@ -366,7 +366,7 @@
 
 
                 };
-                xhttp.open("GET", "http://{{ip}}:80/estimate", true);
+                xhttp.open("GET", "http://{{ip}}:3080/estimate", true);
 
                 xhttp.send();
             }

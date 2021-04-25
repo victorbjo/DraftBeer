@@ -17,7 +17,11 @@ while True:
     try:
         tempTarget = target.readTarget()
         tempTarget = float(tempTarget)
-
+        time.sleep(1)
+        #print(tempTarget)
+        #print(GPIO.input(pumps))
+        actualTemp = tempRead.get_temp()
+        #print(actualTemp)
         #actualTemp = tempRead.read_temp()
         actualTemp = tempRead.get_temp()
         if tempTarget > actualTemp + 0.5 and GPIO.input(pumps) == 1:
@@ -34,7 +38,7 @@ while True:
             GPIO.output(pumps,GPIO.HIGH)
             GPIO.output(peltier,GPIO.HIGH)
             print("Cycling hot water")
-            time.sleep(2)
+            time.sleep(5)
             GPIO.output(pumps,GPIO.LOW)
             GPIO.output(peltier,GPIO.LOW)
             recentlyCycled = True
