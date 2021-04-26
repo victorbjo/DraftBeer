@@ -192,6 +192,7 @@
 
 
             function updateTemp() {
+			
                 var xhttp = new XMLHttpRequest();
                 xhttp.onreadystatechange = function () {
                     var idArr = ["beerTemp", "waterTemp", "airTemp"];
@@ -210,7 +211,7 @@
                     }
 
                 };
-                xhttp.open("GET", "http://{{ip}}:3080/temps", true);
+                xhttp.open("GET", "http://{{ip}}/temps", true);
                 xhttp.send();
             }
 
@@ -245,7 +246,7 @@
 
                     myChart.update();
                 };
-                xhttp.open("GET", "http://{{ip}}:3080/test", true);
+                xhttp.open("GET", "http://{{ip}}:80/test", true);
 
                 xhttp.send();
             }
@@ -316,7 +317,7 @@
 
 
                 };
-                xhttp.open("GET", "http://{{ip}}:3080/updateTarget?target=" + target, true);
+                xhttp.open("GET", "http://{{ip}}:80/updateTarget?target=" + target, true);
 
                 xhttp.send();
             }
@@ -338,23 +339,24 @@
 
 
                 };
-                xhttp.open("GET", "http://{{ip}}:3080/readTarget?target=2", true);
+                xhttp.open("GET", "http://{{ip}}:80/readTarget?target=2", true);
 
                 xhttp.send();
             }
             function changeCoolerStatus(status) {
                 imgStatus = document.getElementById("coolerStatus").src;
-                //alert(status);
+                /*alert(status);
+				alert(imgStatus);*/
                 if (status == 0) {
-                    if (imgStatus != "http://{{ip}}:3080/static/coolingOff.png") {
-                        document.getElementById("coolerStatus").src = "http://{{ip}}:3080/static/coolingOff.png";
+                    if (imgStatus != "http://{{ip}}static/coolingOff.png") {
+                        document.getElementById("coolerStatus").src = "http://{{ip}}/static/coolingOff.png";
                     }
 
                 }
                 else {
                     
-                    if (imgStatus == "http://{{ip}}:3080/static/coolingOff.png") {
-                        document.getElementById("coolerStatus").src = "http://{{ip}}:3080/static/coolingOn.png";
+                    if (imgStatus == "http://{{ip}}/static/coolingOff.png") {
+                        document.getElementById("coolerStatus").src = "http://{{ip}}/static/coolingOn.png";
                     }
                 }
             }
@@ -374,7 +376,7 @@
 
 
                 };
-                xhttp.open("GET", "http://{{ip}}:3080/estimate", true);
+                xhttp.open("GET", "http://{{ip}}:80/estimate", true);
 
                 xhttp.send();
             }
