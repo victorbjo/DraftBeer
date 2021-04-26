@@ -76,13 +76,13 @@
                     <h3 class="info-h3">Hotside temperature<br /></h3>
                 </div>
                 <div>
-                    <p id="waterTemp">The XMLHttpRequest Object</p>
+                    <p id="waterTemp">Could not load temps</p>
                 </div>
             </div>
             <div class="info">
                 <h3 class="info-h3" id="infoAri">Ambient temperature<br /></h3>
                 <div>
-                    <p id="airTemp">The XMLHttpRequest Object</p>
+                    <p id="airTemp">Could not load temps</p>
                 </div>
             </div>
 
@@ -192,6 +192,7 @@
 
 
             function updateTemp() {
+			
                 var xhttp = new XMLHttpRequest();
                 xhttp.onreadystatechange = function () {
                     var idArr = ["beerTemp", "waterTemp", "airTemp"];
@@ -210,7 +211,7 @@
                     }
 
                 };
-                xhttp.open("GET", "http://{{ip}}:80/temps", true);
+                xhttp.open("GET", "http://{{ip}}/temps", true);
                 xhttp.send();
             }
 
@@ -344,9 +345,10 @@
             }
             function changeCoolerStatus(status) {
                 imgStatus = document.getElementById("coolerStatus").src;
-                //alert(status);
+                /*alert(status);
+				alert(imgStatus);*/
                 if (status == 0) {
-                    if (imgStatus != "http://{{ip}}/static/coolingOff.png") {
+                    if (imgStatus != "http://{{ip}}static/coolingOff.png") {
                         document.getElementById("coolerStatus").src = "http://{{ip}}/static/coolingOff.png";
                     }
 

@@ -339,14 +339,14 @@
             function changeCoolerStatus(status) {
                 imgStatus = document.getElementById("coolerStatus").src;
                 if (status == 0) {
-                    if (imgStatus != "http://192.168.0.168/static/coolingOff.png") {
-                        document.getElementById("coolerStatus").src = "http://192.168.0.168/static/coolingOff.png";
+                    if (imgStatus != "/static/coolingOff.png") {
+                        document.getElementById("coolerStatus").src = "/static/coolingOff.png";
                     }
 
                 }
                 else {
-                    if (imgStatus == "http://192.168.0.168/static/coolingOff.png") {
-                        document.getElementById("coolerStatus").src = "http://192.168.0.168/static/coolingOn.png";
+                    if (imgStatus == "/static/coolingOff.png") {
+                        document.getElementById("coolerStatus").src = "/static/coolingOn.png";
                     }
                 }
             }

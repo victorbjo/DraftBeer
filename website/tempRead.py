@@ -35,9 +35,10 @@ def read_temp():
    file.close()
    return(parsedTemp,f[:f.find(";")],f[f.find(";")+1:])
 def get_temp():
+   #print("OK")
    parsedTemp = parse_temp(temp_sensor0)
    f = open("tempDataMain.txt","w")
    f.write(str(parsedTemp))
    f.close()
-   return parsedTemp
-print(get_temp())
+   return parsedTemp # parsedTemp
+#print(get_temp())
