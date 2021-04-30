@@ -78,7 +78,18 @@ def estimate():
     list ={'estimate':[ai.estimate()]}
     return jsonify(list) #Returns JSON with list
 
+@app.route('/turnOff',methods = ['GET','POST'])
+def turnOff():
+    os.system("sudo shutdown -h now")
+
+@app.route('/reboot',methods = ['GET','POST'])
+def reboot():
+    print("Rebooting")
+    os.system("sudo reboot")
+
 if __name__ == '__main__':
     app.run(debug=False,port=80,host='0.0.0.0')    
+
+
 
 

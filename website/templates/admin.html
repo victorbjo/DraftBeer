@@ -65,9 +65,8 @@
                     </thead>
                 </table>
                 <p id="ETA" class="data">13:05</p>
-
-
-
+                <button onclick="turnOff()">Turn off</button>
+                <button onclick="reboot()">Reboot</button>
             </div>
             <div class="info">
                 <div>
@@ -370,9 +369,42 @@
 
                 xhttp.send();
             }
-            function lengthOfThing() {
-                alert(myChart.data.datasets[0].data.length);
+            function turnOff(){
+                var xhttp = new XMLHttpRequest();
+                alert("Turning Off");
+                xhttp.onreadystatechange = function () {
+
+
+                    if (this.responseText != null && this.responseText != "") {
+
+                        alert("Did not turn off");
+
+                    }
+
+
+                };
+xhttp.open("GET", "http://{{ip}}:80/turnOff", true);
+
+xhttp.send();
             }
 
+            function reboot(){
+                var xhttp = new XMLHttpRequest();
+                alert("Rebooting");
+                xhttp.onreadystatechange = function () {
+
+
+                    if (this.responseText != null && this.responseText != "") {
+
+                        alert("Did not turn off");
+
+                    }
+
+
+                };
+xhttp.open("GET", "http://{{ip}}:80/reboot", true);
+
+xhttp.send();
+            }
         </script>
 </body>
