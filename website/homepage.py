@@ -14,7 +14,7 @@ import ai
 import RPi.GPIO as GPIO
 GPIO.setmode(GPIO.BCM)
 GPIO.setwarnings(False)
-GPIO.setup(14,GPIO.OUT)
+GPIO.setup(24,GPIO.OUT)
 
 s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 s.connect(("8.8.8.8", 80))
@@ -24,11 +24,11 @@ print(s.getsockname()[0])
 @app.route('/',methods = ['GET'])
 @app.route('/send',methods = ['GET','POST'])
 def send():
-    return render_template('age.html', ip="beer.bjoerholm.dk")#=s.getsockname()[0])
+    return render_template('age.html', ip="ecbeer.dk")#=s.getsockname()[0])
 
 @app.route('/admin',methods = ['GET','POST'])
 def admin():
-    return render_template('admin.html', ip="87.63.151.63")#ip=s.getsockname()[0])
+    return render_template('admin.html', ip="ecbeer.dk")#ip=s.getsockname()[0])
 
 @app.route('/images',methods = ['GET','POST'])
 def images():
@@ -60,7 +60,7 @@ def charts():
 @app.route('/readTarget',methods = ['GET','POST'])
 
 def readTarget():
-    list ={'target':[target.readTarget()],'status':[str(GPIO.input(14))]}
+    list ={'target':[target.readTarget()],'status':[str(GPIO.input(24))]}
     return jsonify(list) #Returns JSON with list
 
 

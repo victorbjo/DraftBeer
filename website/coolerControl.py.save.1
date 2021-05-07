@@ -2,7 +2,6 @@ import RPi.GPIO as GPIO
 import time
 import numpy as np
 import target
-import tempRead
 GPIO.setmode(GPIO.BCM)
 GPIO.setwarnings(False)
 pumps = 24
@@ -15,18 +14,16 @@ while True:
     
     try:
 
-        tempTarget = target.readTarget()
-        
+        tempTarget = target.readTarget(
         tempTarget = float(tempTarget)
         time.sleep(0.01)
         #print("\n\n")
-        
+        print("ok")
         print(tempTarget)
-        #print("ok")
-	#print(GPIO.input(pumps))
+        print(GPIO.input(pumps))
         actualTemp = tempRead.get_temp()
         print(actualTemp)
-        print("her")
+        print("\n\n")
         #actualTemp = tempRead.read_temp()
         #actualTemp = tempRead.get_temp()
         if tempTarget > actualTemp + 0.5 and GPIO.input(pumps) == 1:
@@ -37,7 +34,7 @@ while True:
         elif tempTarget< actualTemp and GPIO.input(pumps) == 0:
             print("Turning ON coolers")
             GPIO.output(pumps,GPIO.HIGH)
-            GPIO.output(peltier,GPIO.HIGH)
+            GPIO.output(peltier,GFOPIO.HIGH)
             recentlyCycled = False
         elif tempTarget < actualTemp + 0.2 and GPIO.input(pumps) == 0 and recentlyCycled == False:
             GPIO.output(pumps,GPIO.HIGH)
