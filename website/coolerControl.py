@@ -15,26 +15,33 @@ while True:
     
     try:
 
-        tempTarget = target.readTarget()
-        
-        tempTarget = float(tempTarget)
+        try:
+            tempTarget = target.readTarget()
+            tempTarget = float(tempTarget)
+        except:
+            tempTarget = 3
+            print("Something went wrong")
         time.sleep(0.01)
         #print("\n\n")
         
-        print(tempTarget)
+        #print(tempTarget)
         #print("ok")
 	#print(GPIO.input(pumps))
-        actualTemp = tempRead.get_temp()
-        print(actualTemp)
-        print("her")
+        try:
+            actualTemp = tempRead.get_temp()
+        except:
+            print("Could not read temp")
+            actualTemp = 5
+        #print(actualTemp)
+        #print("her")
         #actualTemp = tempRead.read_temp()
         #actualTemp = tempRead.get_temp()
-        if tempTarget > actualTemp + 0.5 and GPIO.input(pumps) == 1:
+        if tempTarget > float(actualTemp) + 0.5 and GPIO.input(pumps) == 1:
             print("Turning OFF coolers")
             GPIO.output(pumps,GPIO.LOW)
             GPIO.output(peltier,GPIO.LOW)
             recentlyCycled = False
-        elif tempTarget< actualTemp and GPIO.input(pumps) == 0:
+        elif tempTarget < actualTemp and GPIO.input(pumps) == 0:
             print("Turning ON coolers")
             GPIO.output(pumps,GPIO.HIGH)
             GPIO.output(peltier,GPIO.HIGH)
@@ -47,6 +54,7 @@ while True:
             GPIO.output(pumps,GPIO.LOW)
             GPIO.output(peltier,GPIO.LOW)
             recentlyCycled = True
+            
         '''except Exception as e:
             print("Failed to do it")
             print(e)
@@ -56,6 +64,6 @@ while True:
             print("Failed to do it")
             #exit()'''
     except:
-        a = 2
+        print("\n\nSomething went terribly wrong!!!\n\n")
 
 
