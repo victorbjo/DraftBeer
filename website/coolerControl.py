@@ -20,7 +20,7 @@ while True:
             tempTarget = float(tempTarget)
         except:
             tempTarget = 3
-            print("Something went wrong")
+            print("Something went wrong, could not read TempTarget")
         time.sleep(0.01)
         #print("\n\n")
         
