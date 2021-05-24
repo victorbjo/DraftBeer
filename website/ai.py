@@ -60,4 +60,4 @@ def estimate():
     for bit in resultRounded:  #Converts results(binary) into an int
         out = (out << 1) | bit 
     return (addTime(out))
-print(estimate())
+#print(estimate())

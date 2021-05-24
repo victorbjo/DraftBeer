@@ -1,6 +1,7 @@
 import RPi.GPIO as GPIO
 import time
 import numpy as np
+import datetime
 import target
 import tempRead
 GPIO.setmode(GPIO.BCM)
@@ -14,19 +15,15 @@ coolers = False
 while True:
     
     try:
-
         tempTarget = target.readTarget()
-        
         tempTarget = float(tempTarget)
         time.sleep(0.01)
         #print("\n\n")
-        
-        print(tempTarget)
-        #print("ok")
-	#print(GPIO.input(pumps))
+        #print(tempTarget)
+        #print(GPIO.input(pumps))
         actualTemp = tempRead.get_temp()
-        print(actualTemp)
-        print("her")
+        #print(actualTemp)
+        #print("\n\n")
         #actualTemp = tempRead.read_temp()
         #actualTemp = tempRead.get_temp()
         if tempTarget > actualTemp + 0.5 and GPIO.input(pumps) == 1:
@@ -37,7 +34,7 @@ while True:
         elif tempTarget< actualTemp and GPIO.input(pumps) == 0:
             print("Turning ON coolers")
             GPIO.output(pumps,GPIO.HIGH)
-            GPIO.output(peltier,GPIO.HIGH)
+            GPIO.output(peltier,GOPIO.HIGH)
             recentlyCycled = False
         elif tempTarget < actualTemp + 0.2 and GPIO.input(pumps) == 0 and recentlyCycled == False:
             GPIO.output(pumps,GPIO.HIGH)
@@ -55,7 +52,11 @@ while True:
             print(type(GPIO.input(14)))
             print("Failed to do it")
             #exit()'''
-    except:
-        a = 2
-
+    except Exception as e:
+        f = open("crash.txt", "a")
+        now = datetime.datetime.now()
+        f.write("Site crashed @ " + str(now.hour)+":"+str(now.minute)+"\n")
+        f.write(str(e))
+        f.write("\n")
+        f.close()
 
