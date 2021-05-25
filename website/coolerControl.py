@@ -34,7 +34,7 @@ while True:
         elif tempTarget< actualTemp and GPIO.input(pumps) == 0:
             print("Turning ON coolers")
             GPIO.output(pumps,GPIO.HIGH)
-            GPIO.output(peltier,GOPIO.HIGH)
+            GPIO.output(peltier,GPIO.HIGH)
             recentlyCycled = False
         elif tempTarget < actualTemp + 0.2 and GPIO.input(pumps) == 0 and recentlyCycled == False:
             GPIO.output(pumps,GPIO.HIGH)
