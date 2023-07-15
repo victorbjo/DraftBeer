@@ -15,19 +15,42 @@ coolers = False
 while True:
     
     try:
-        tempTarget = target.readTarget()
-        tempTarget = float(tempTarget)
+        try:
+            tempTarget = target.readTarget()
+            print(tempTarget, "TEMP")
+            tempTarget = float(tempTarget)
+        except Exception as e:
+            print("Could not read temp target")
+            f = open("crash.txt", "a")
+            now = datetime.datetime.now()
+            f.write("failed with tempTarget @ " + str(now.hour)+":"+str(now.minute)+"\n")
+            f.write(str(e))
+            f.write("\n")
+            f.close()
+        
+        
         time.sleep(0.01)
         #print("\n\n")
         #print(tempTarget)
         #print(GPIO.input(pumps))
-        actualTemp = tempRead.get_temp()
+        try:
+            actualTemp = tempRead.get_temp()
+        except Exception as e:
+            print("FUCK")
+            f = open("crash.txt", "a")
+            now = datetime.datetime.now()
+            f.write("failed with actualTemp @ " + str(now.hour)+":"+str(now.minute)+"\n")
+            f.write(str(e))
+            f.write("\n")
+            f.close()
         #print(actualTemp)
         #print("\n\n")
         #actualTemp = tempRead.read_temp()
         #actualTemp = tempRead.get_temp()
+        print(tempTarget, "HERE")
+        print(actualTemp)
         if tempTarget > actualTemp + 0.5 and GPIO.input(pumps) == 1:
-            print("Turning OFF coolers")
+            #print("Turning OFF coolers")
             GPIO.output(pumps,GPIO.LOW)
             GPIO.output(peltier,GPIO.LOW)
             recentlyCycled = False
@@ -35,11 +58,12 @@ while True:
             print("Turning ON coolers")
             GPIO.output(pumps,GPIO.HIGH)
             GPIO.output(peltier,GPIO.HIGH)
+            #print("Chaning temp")
             recentlyCycled = False
         elif tempTarget < actualTemp + 0.2 and GPIO.input(pumps) == 0 and recentlyCycled == False:
             GPIO.output(pumps,GPIO.HIGH)
             GPIO.output(peltier,GPIO.HIGH)
-            print("Cycling hot water")
+            #print("Cycling hot water")
             time.sleep(5)
             GPIO.output(pumps,GPIO.LOW)
             GPIO.output(peltier,GPIO.LOW)
@@ -53,6 +77,7 @@ while True:
             print("Failed to do it")
             #exit()'''
     except Exception as e:
+        print("Could not control")
         f = open("crash.txt", "a")
         now = datetime.datetime.now()
         f.write("Site crashed @ " + str(now.hour)+":"+str(now.minute)+"\n")

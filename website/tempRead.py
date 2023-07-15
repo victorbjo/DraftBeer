@@ -1,4 +1,5 @@
 import os
+import datetime
 from time import sleep
 os.system('modprobe w1-gpio')
 os.system('modprobe w1-therm')
@@ -34,11 +35,29 @@ def read_temp():
    f = file.read()
    file.close()
    return(parsedTemp,f[:f.find(";")],f[f.find(";")+1:])
+
+
 def get_temp():
-   #print("OK")
-   parsedTemp = parse_temp(temp_sensor0)
-   f = open("tempDataMain.txt","w")
-   f.write(str(parsedTemp))
-   f.close()
-   return parsedTemp # parsedTemp
-#print(get_temp())
+   try:
+      parsedTemp = parse_temp(temp_sensor0)
+      try:
+         f = open("tempDataMain.txt","w")
+         f.write(str(parsedTemp))
+         f.close()
+      except:
+         f = open("crashTemp.txt", "a")
+         now = datetime.datetime.now()
+         f.write("Could not open or save file @ " + str(now.hour)+":"+str(now.minute)+"\n")
+         f.write(str(e))
+         f.write("\n")
+         f.close()
+
+   except:
+      f = open("crashTemp.txt", "a")
+      now = datetime.datetime.now()
+      f.write("Could not parse Temp @ " + str(now.hour)+":"+str(now.minute)+"\n")
+      f.write(str(e))
+      f.write("\n")
+      f.close()
+      parsedTemp=0
+   return parsedTemp

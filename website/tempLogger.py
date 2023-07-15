@@ -67,33 +67,37 @@ while True:
             fiveMin = False
     except:
         print("Could not save 3 min data")
-        
-    try: 
+    try:
         if int(localTimeSec)%10 == 0:  #Will log every 10th sec
             f = open("tempDataMain.txt","r")
-            temps = float(f.read())
-            f.close()
-            temps = round(temps, 2)
-            temps = format(temps, '.2f')
-            timeStamp10Sec = np.append(timeStamp10Sec,[localTimeHour+":"+localTimeMin])
-            dataTemp10Sec = np.append(dataTemp10Sec,[temps])
-            goalTemp10sec = np.append(goalTemp10sec,[target.readTarget()])
-            print("Saving temp: "+str(temps)+" and timestamp @"+timeStamp10Sec[-1]+" GoalTemp:" + target.readTarget())
-            np.savez('data10Sec', temp=dataTemp10Sec, time=timeStamp10Sec,goal=goalTemp10sec)
-            time.sleep(1)
-            counterSec = counterSec + 1
+            try:
+                temps = float(f.read())
+                f.close()
+                temps = round(temps, 2)
+                temps = format(temps, '.2f')
+                timeStamp10Sec = np.append(timeStamp10Sec,[localTimeHour+":"+localTimeMin])
+                dataTemp10Sec = np.append(dataTemp10Sec,[temps])
+                goalTemp10sec = np.append(goalTemp10sec,[target.readTarget()])
+                print("Saving temp: "+str(temps)+" and timestamp @"+timeStamp10Sec[-1]+" GoalTemp:" + target.readTarget())
+                #np.savez('data10Sec', temp=dataTemp10Sec, time=timeStamp10Sec,goal=goalTemp10sec)
+                np.savez('data10Sec', temp = dataTemp10Sec, time=timeStamp10Sec, goal=goalTemp10sec)
+                print()
+                time.sleep(1)
+                counterSec = counterSec + 1
+            except:
+                print("FUCK")
             if timeStamp10Sec.size > numOfEntries:
                 timeStamp10Sec = np.delete(timeStamp10Sec,0,0)
             if dataTemp10Sec.size > numOfEntries:
                 dataTemp10Sec = np.delete(dataTemp10Sec, 0, 0)
 
-        if counterSec >= numOfEntries:
+        '''if counterSec >= numOfEntries:
             print("Renaming data10Sec.npz into oldLogs/data10Sec"+localTimeHour+".npz")
             os.rename("data10Sec.npz", "oldLogs/data10Sec"+localTimeHour+".npz")
             counterSec = 0
         if counterSec >= numOfEntries:
             print("Renaming data10Sec.npz into oldLogs/data10Sec"+localTimeHour+".npz")
             os.rename("data10Sec.npz", "oldLogs/data10Sec"+localTimeHour+".npz")
-            counterSec = 0
+            counterSec = 0'''
     except:
         print("Could not save 10 sec data")
