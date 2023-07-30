@@ -3,7 +3,7 @@ name: ci
 on:
   push:
     branches:
-      - "main"
+      - "master"
 env:
   CONTAINER_REGISTRY: ghcr.io
   IMAGE_NAME: docker_test
