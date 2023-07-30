@@ -6,7 +6,7 @@ on:
       - "master"
 env:
   CONTAINER_REGISTRY: ghcr.io
-  IMAGE_NAME: docker_test
+  IMAGE_NAME: draftbeer
   
 jobs:
   build:
@@ -38,5 +38,5 @@ jobs:
           file: Dockerfile
           containerfiles: Dockerfile
           push: true
-          tags: ghcr.io/${{ github.repository_owner }}/docker_test:latest
+          tags: ghcr.io/${{ github.repository_owner }}/draftbeer:latest
           platforms: linux/arm64
