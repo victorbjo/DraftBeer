@@ -1,0 +1,90 @@
+<link rel="stylesheet" href='/static/infopage.css' />
+<link rel="stylesheet" href='/static/mainstyle.css' />
+<body onload="loadImages()">
+    <div class="div-main" id="main">
+        <div style="line-height: 50%;">
+
+            <a href="/" class="titleText">
+                <p> EcDrink&nbsp &nbsp V2.0</p>
+                <p class="name"> &nbsp&nbspPowered by </p>
+                <p class="name AI"> &nbspAI</p>
+                <br>
+                <p class="name"> By Bo &amp Victor Bjørholm </p>
+                <br>
+            </a>
+
+        
+        <div id="infoDiv" class="info-wrapper">
+            <div class="info"> 
+        <h3>Første fungerende anlæg</h3>
+        <img src="/static/pictures/loading.gif" class="loading image" alt="coolerStatus" id="V1.jpg">
+        <p class="description">Samlet dagen før sommerfest 2020 som blev afholdt 10 Juli</p>
+        <img src="/static/pictures/loading.gif" class="loading image" alt="coolerStatus" id="indeni.jpg">
+        <img src="/static/pictures/loading.gif" class="loading image" alt="coolerStatus" id="IMG_20200701_143435.jpg">
+        <img src="/static/pictures/loading.gif" class="loading image" alt="coolerStatus" id="107889839_10158304737997978_2503854546593927394_o.jpg">
+        <img src="/static/pictures/loading.gif" class="loading image" alt="coolerStatus" id="107894375_10158304736782978_4355044564845546655_o.jpg">
+        <img src="/static/pictures/loading.gif" class="loading image" alt="coolerStatus" id="108399080_10158304735752978_4966125573083290140_o.jpg">
+        <img src="/static/pictures/loading.gif" class="loading image" alt="coolerStatus" id="109083826_10158888645359595_4573937853997994089_n.jpg">
+        
+        <img src="/static/pictures/loading.gif" class="loading image" alt="coolerStatus" id="IMG_20200628_204354.jpg">
+        <img src="/static/pictures/loading.gif" class="loading image" alt="coolerStatus" id="IMG_20200628_204401.jpg">
+        <img src="/static/pictures/loading.gif" class="loading image" alt="coolerStatus" id="IMG_20200628_204407.jpg">    
+    </div>
+    <div class="info"> 
+        <h3>Prototype af Version 1</h3>
+        <img src="/static/pictures/loading.gif" class="loading image" alt="coolerStatus" id="v2.jpg"">
+        <img src="/static/pictures/loading.gif" class="loading image" alt="coolerStatus" id="IMG_20200301_112322.jpg">
+        <img src="/static/pictures/loading.gif" class="loading image" alt="coolerStatus" id="IMG_20200301_112325.jpg">
+        <img src="/static/pictures/loading.gif" class="loading image" alt="coolerStatus" id="IMG_20200301_112328.jpg">
+        <img src="/static/pictures/loading.gif" class="loading image" alt="coolerStatus" id="IMG_20200620_150024.jpg">
+        <img src="/static/pictures/loading.gif" class="loading image" alt="coolerStatus" id="IMG_20200620_150027.jpg">
+        <img src="/static/pictures/loading.gif" class="loading image" alt="coolerStatus" id="IMG_20200620_162213.jpg">
+        <img src="/static/pictures/loading.gif" class="loading image" alt="coolerStatus" id="IMG_20200620_162427.jpg">
+        <img src="/static/pictures/loading.gif" class="loading image" alt="coolerStatus" id="IMG_20200620_164503.jpg">
+        <p class="description">Succesful test</p>
+    </div>
+    <div class="info">
+        <h3>Prototype og Færdigt setup: Version 2</h3> 
+        <img src="/static/pictures/loading.gif" class="loading image" alt="coolerStatus" id="IMG_20201117_173545784.jpg">
+        <p class="description">Køleelement V2</p>
+        <img src="/static/pictures/loading.gif" class="loading image" alt="coolerStatus" id="IMG_20201229_113513816.jpg">
+        <img src="/static/pictures/loading.gif" class="loading image" alt="coolerStatus" id="IMG_20201229_113529938.jpg">
+        <img src="/static/pictures/loading.gif" class="loading image" alt="coolerStatus" id="IMG_20201231_123043387.jpg">
+        <p class="description">Ny bar med indbygget fadølsanlæg</p>
+    </div>
+    <div class="info">
+        <div>
+            <h3 class="info-h3">Additional info<br /></h3>
+        </div>
+        <div>
+            <p>For more info on this awesome project click <a href="/info"> here!</a></p>
+            
+            <p>To go back to the front page, click<a href="/"> here!</a></p>
+            <br>
+        </div>
+    </div>
+</div>
+</div>
+
+    <script>
+    function loadImages(){
+        for (var i = 0; i < document.images.length; i ++){
+        loadImage(i);
+        }
+    }
+    function loadImage(imageNum) {
+        var img = new Image();
+        //for (var i = 0; i < document.images.length; i ++){
+        var image = document.images[imageNum];
+        var downloadingImage = new Image();
+        downloadingImage.onload = function(){
+            image.src = this.src;   
+            image.classList.remove("loading");
+            };
+
+        downloadingImage.src = "/static/pictures/"+image.id;
+        
+            
+        }
+    </script>
+</body>

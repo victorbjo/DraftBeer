@@ -1,20 +1,9 @@
 from flask import Flask, render_template,request
 app = Flask(__name__)
-import random
 import socket
-import os
 import numpy as np
-from time import sleep
-import time
-import tempRead as temp
-import json
 from flask import jsonify
 import target
-import ai
-import RPi.GPIO as GPIO
-GPIO.setmode(GPIO.BCM)
-GPIO.setwarnings(False)
-GPIO.setup(14,GPIO.OUT)
 
 s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 s.connect(("8.8.8.8", 80))
@@ -60,7 +49,7 @@ def charts():
 @app.route('/readTarget',methods = ['GET','POST'])
 
 def readTarget():
-    list ={'target':[target.readTarget()],'status':[str(GPIO.input(14))]}
+    list ={'target':[target.readTarget()],'status':[0]}#[str(GPIO.input(14))]}
     return jsonify(list) #Returns JSON with list
 
 
@@ -79,6 +68,6 @@ def estimate():
     return jsonify(list) #Returns JSON with list
 
 if __name__ == '__main__':
-    app.run(debug=False,port=80,host='0.0.0.0')    
+    app.run(debug=False,port=8001,host='0.0.0.0')    
 
 
