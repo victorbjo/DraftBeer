@@ -3,7 +3,6 @@ app = Flask(__name__)
 import socket
 import numpy as np
 from flask import jsonify
-import target
 
 s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 s.connect(("8.8.8.8", 80))
@@ -11,7 +10,6 @@ print(s.getsockname()[0])
 
 
 @app.route('/',methods = ['GET'])
-@app.route('/send',methods = ['GET','POST'])
 def send():
     return render_template('age.html', ip=s.getsockname()[0])
 
@@ -27,10 +25,7 @@ def images():
 @app.route('/info',methods = ['GET','POST'])
 def info():
     return render_template('info.html', ip=s.getsockname()[0])
-@app.route('/temps',methods = ['GET','POST'])
-def temps():
-    temps = temp.read_temp()
-    return render_template('temp.html',temp0=temps[0],temp1=temps[2],temp2=temps[1], ip=s.getsockname()[0])
+
 @app.route('/test',methods = ['GET','POST'])
 def test():
 
@@ -46,19 +41,6 @@ def test():
 def charts():
     return render_template('chart.html', ip=s.getsockname()[0])
 
-@app.route('/readTarget',methods = ['GET','POST'])
-
-def readTarget():
-    list ={'target':[target.readTarget()],'status':[0]}#[str(GPIO.input(14))]}
-    return jsonify(list) #Returns JSON with list
-
-
-@app.route('/updateTarget',methods = ['GET','POST'])
-def updateTarget():
-    tempTarget=str(request.args.get("target"))
-    target.updateTarget(tempTarget)
-    list ={'target':[str(request.args.get("target"))]}
-    return jsonify(list) #Returns JSON with list
 
 
 @app.route('/estimate',methods = ['GET','POST'])
@@ -68,6 +50,6 @@ def estimate():
     return jsonify(list) #Returns JSON with list
 
 if __name__ == '__main__':
-    app.run(debug=False,port=8001,host='0.0.0.0')    
+    app.run(debug=False,port=80,host='0.0.0.0')    
 
 
