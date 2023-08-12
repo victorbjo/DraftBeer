@@ -10,9 +10,12 @@ print(s.getsockname()[0])
 
 
 @app.route('/',methods = ['GET'])
-def send():
+def main():
     return render_template('age.html', ip=s.getsockname()[0])
 
+@app.route('/send',methods = ['GET','POST'])
+def send():
+    return render_template('send.html', ip=s.getsockname()[0])
 @app.route('/admin',methods = ['GET','POST'])
 def admin():
     return render_template('admin.html', ip=s.getsockname()[0])

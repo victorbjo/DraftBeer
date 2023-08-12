@@ -7,6 +7,7 @@
     <script src="https://unpkg.com/mqtt/dist/mqtt.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.min.js"></script>
     <script src="static/main.js"></script>
+    <script src="static/updater.js"></script>
     <script src=""></script>
 
 </head>
@@ -26,7 +27,7 @@
         </div>
         <div id="infoDiv" class="info-wrapper">
             <div class="info">
-                <h3>Cooler Control <img src="/static/coolingOff.png" class="coolerLogo" alt="coolerStatus"
+                <h3>Cooler Control <img src="/static/power_status_off.png" class="coolerLogo" id="power_status"><img src="/static/coolingOff.png" class="coolerLogo" alt="coolerStatus"
                         id="coolerStatus"></h3>
                 <table>
                     <thead>
@@ -39,14 +40,14 @@
                         </tr>
                     </thead>
                 </table>
-                <p id="beerTemp" class="data">Beer</p>
+                <p id="temp_cooler" class="data">Beer</p>
 
                 <table>
                     <thead>
                         <tr>
 
                             <th>
-                                <p>Target temp: &nbsp </p><p id="targetTemp">00</p>
+                                <p>Target temp: &nbsp </p><p id="temp_target">00</p>
                                     
                             </th>
                             <th></th>
@@ -79,13 +80,13 @@
                     <h3 class="info-h3">Hotside temperature<br /></h3>
                 </div>
                 <div>
-                    <p id="waterTemp">The XMLHttpRequest Object</p>
+                    <p id="temp_hotside">The XMLHttpRequest Object</p>
                 </div>
             </div>
             <div class="info">
-                <h3 class="info-h3" id="infoAri">Ambient temperature<br /></h3>
+                <h3 class="info-h3" id="temp_ambient_h">Ambient temperature<br /></h3>
                 <div>
-                    <p id="airTemp">The XMLHttpRequest Object</p>
+                    <p id="temp_ambient">The XMLHttpRequest Object</p>
                 </div>
             </div>
 

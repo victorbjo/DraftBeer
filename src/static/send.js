@@ -30,9 +30,6 @@ client.on('reconnect', () => {
 client.on('connect', () => {
   console.log('Client connected:' + clientId)
   // Subscribe
-  //client.subscribe('draft/temp_request', { qos: 0 })
-  client.subscribe('draft/temp', { qos: 0 })
-  //client.subscribe('draft/temp_', { qos: 0 })
 })
 
 
@@ -51,10 +48,12 @@ function publish(topic, message) {
     console.log('published', topic, message)
   }
 }
-function aknowledge(){
-  client.publish("draft/temp_ak","aknowledge",options);
-}
 function update_temp(msg){
-  update_values(msg);
-  aknowledge();
+  alert(msg);
+}
+function set_target(){
+  var target = document.getElementById("target_temp").value;
+  var message = '{"temp_target":"'+target+'","temp_cooler":"10","temp_hotside":"11","temp_ambient":"12"}'
+  //alert(JSON.parse(message).temp_target);
+  publish("draft/temp", message);
 }
