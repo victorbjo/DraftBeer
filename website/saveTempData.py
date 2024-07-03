@@ -38,4 +38,5 @@ while True:
       f.close()
       time.sleep(0.5)
    except:
-      print("Could not save data")
+      pass
+      #print("Could not save data")

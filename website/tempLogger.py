@@ -54,7 +54,7 @@ while True:
             timeStamp3Min = np.append(timeStamp3Min,[localTimeHour+":"+localTimeMin])
             dataTemp3Min = np.append(dataTemp3Min,[temps])
             goalTemp3Min = np.append(goalTemp3Min,[target.readTarget()])
-            print("Saving temp: "+str(temps)+" and timestamp @"+timeStamp3Min[-1]+" GoalTemp:" + target.readTarget())
+            #print("Saving temp: "+str(temps)+" and timestamp @"+timeStamp3Min[-1]+" GoalTemp:" + target.readTarget())
             np.savez('data3Min', temp=dataTemp3Min, time=timeStamp3Min,goal=goalTemp3Min)
             fiveMin = True
             counterMin = counterMin +1 
@@ -66,7 +66,8 @@ while True:
         elif int(localTimeMin)%3!=0:
             fiveMin = False
     except:
-        print("Could not save 3 min data")
+        pass
+        #print("Could not save 3 min data")
     try:
         if int(localTimeSec)%10 == 0:  #Will log every 10th sec
             f = open("tempDataMain.txt","r")
@@ -81,11 +82,11 @@ while True:
                 print("Saving temp: "+str(temps)+" and timestamp @"+timeStamp10Sec[-1]+" GoalTemp:" + target.readTarget())
                 #np.savez('data10Sec', temp=dataTemp10Sec, time=timeStamp10Sec,goal=goalTemp10sec)
                 np.savez('data10Sec', temp = dataTemp10Sec, time=timeStamp10Sec, goal=goalTemp10sec)
-                print()
+                #print()
                 time.sleep(1)
                 counterSec = counterSec + 1
             except:
-                print("FUCK")
+                pass
             if timeStamp10Sec.size > numOfEntries:
                 timeStamp10Sec = np.delete(timeStamp10Sec,0,0)
             if dataTemp10Sec.size > numOfEntries:
@@ -100,4 +101,4 @@ while True:
             os.rename("data10Sec.npz", "oldLogs/data10Sec"+localTimeHour+".npz")
             counterSec = 0'''
     except:
-        print("Could not save 10 sec data")
+        pass

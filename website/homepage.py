@@ -24,11 +24,11 @@ print(s.getsockname()[0])
 @app.route('/',methods = ['GET'])
 @app.route('/send',methods = ['GET','POST'])
 def send():
-    return render_template('age.html', ip="ecbeer.dk")#=s.getsockname()[0])
+    return render_template('age.html', ip=s.getsockname()[0])#=s.getsockname()[0])
 
 @app.route('/admin',methods = ['GET','POST'])
 def admin():
-    return render_template('admin.html', ip="ecbeer.dk")#ip=s.getsockname()[0])
+    return render_template('admin.html', ip=s.getsockname()[0])#ip=s.getsockname()[0])
 
 @app.route('/images',methods = ['GET','POST'])
 def images():
@@ -74,7 +74,7 @@ def updateTarget():
 
 @app.route('/estimate',methods = ['GET','POST'])
 def estimate():
-    print("HERE!!!")
+    #print("HERE!!!")
     list ={'estimate':[ai.estimate()]}
     return jsonify(list) #Returns JSON with list
 
@@ -84,7 +84,7 @@ def turnOff():
 
 @app.route('/reboot',methods = ['GET','POST'])
 def reboot():
-    print("Rebooting")
+    #print("Rebooting")
     os.system("sudo reboot")
 
 if __name__ == '__main__':
